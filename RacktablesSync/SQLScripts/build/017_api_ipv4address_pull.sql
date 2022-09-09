@@ -57,12 +57,13 @@ BEGIN
             racktables_django.parse_ipv4int(ip)
             ,''
             ,'' AS comment
-            ,1 AS reserved
+            ,0 AS reserved
             ,ip as oldip
         FROM
             racktables.IPv4Log as log
         WHERE  
-            ip not in (select oldip from racktables_django.api_ipv4address);
+            ip not in (select oldip from racktables_django.api_ipv4address)
+        GROUP BY ip;
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_ipv4address) - inserted;
     RETURN inserted;
