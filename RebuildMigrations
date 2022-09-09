@@ -1,0 +1,4 @@
+rm 'api/migrations/' -r
+python manage.py makemigrations api
+mysql -u root -p < BuildDb
+python manage.py migrate
