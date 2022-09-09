@@ -212,12 +212,13 @@ class Config(models.Model):
 	description = models.TextField(255)
 
 class File(models.Model):
+	oldid = models.IntegerField()
 	name = models.TextField(255)
 	filetype = models.ForeignKey(Dictionary, on_delete=models.CASCADE)
 	size = models.IntegerField()
-	create = models.DateField()
-	modify = models.DateField()
-	access = models.DateField()
+	create = models.DateTimeField()
+	modify = models.DateTimeField()
+	access = models.DateTimeField()
 	thumbnail = models.BinaryField(131072)
 	content = models.BinaryField(52428800)
 	comment = models.TextField(10000)
