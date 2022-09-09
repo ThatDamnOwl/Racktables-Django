@@ -173,7 +173,6 @@ class IPv4Network(models.Model):
 	comment = models.TextField()
 
 class IPv6Address(models.Model):
-	oldid = models.IntegerField()
 	ip = models.GenericIPAddressField()
 	oldip = models.BinaryField(16)
 	name = models.TextField(255)
