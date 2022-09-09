@@ -224,38 +224,47 @@ class File(models.Model):
 	comment = models.TextField(10000)
 
 class FileLinkIPv4Network(models.Model):
+	oldid = models.IntegerField()
 	parent = models.ForeignKey(IPv4Network, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 class FileLinkIPv4RSPool(models.Model):
+	oldid = models.IntegerField()
 	parent = models.ForeignKey(IPv4RSPool, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 class FileLinkIPv4VS(models.Model):
+	oldid = models.IntegerField()
 	parent = models.ForeignKey(IPv4VS, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 class FileLinkIPv6Network(models.Model):
+	oldid = models.IntegerField()
 	parent = models.ForeignKey(IPv6Network, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 class FileLinkLocation(models.Model):
+	oldid = models.IntegerField()
 	parent = models.ForeignKey(Location, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 class FileLinkObject(models.Model):
+	oldid = models.IntegerField()
 	parent = models.ForeignKey(Object, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 class FileLinkRack(models.Model):
+	oldid = models.IntegerField()
 	parent = models.ForeignKey(Rack, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 class FileLinkRow(models.Model):
+	oldid = models.IntegerField()
 	parent = models.ForeignKey(Row, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 class FileLinkUser(models.Model):
+	oldid = models.IntegerField()
 	parent = models.ForeignKey(User, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
