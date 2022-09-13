@@ -3,7 +3,17 @@ from django.contrib.auth.models import User, Group
 from . import bitflags, choices
 # Create your models here.
 
+class UserAccount(models.Model):
+	oldid = models.IntegerField()
+	username = models.TextField(64)
+	realname = models.TextField(64)
+	old_passhah = models.TextField(40)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+class UserConfig(models.Model):
+	user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+	varname = models.TextField(32)
+	varvalue = models.TextField()	
 
 class Molecule(models.Model):
 	oldid = models.IntegerField()
@@ -152,7 +162,7 @@ class IPv4Log(models.Model):
 	oldid = models.IntegerField()
 	ip = models.ForeignKey(IPv4Address, on_delete=models.RESTRICT)
 	date = models.DateTimeField()
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	message = models.TextField()
 
 class IPv4NAT(models.Model):
@@ -189,7 +199,7 @@ class IPv6Log(models.Model):
 	oldid = models.IntegerField()
 	ip = models.ForeignKey(IPv6Address, on_delete=models.RESTRICT)
 	date = models.DateTimeField()
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	message = models.TextField()
 
 class IPv6Network(models.Model):
@@ -265,14 +275,14 @@ class FileLinkRow(models.Model):
 
 class FileLinkUser(models.Model):
 	oldid = models.IntegerField()
-	parent = models.ForeignKey(User, on_delete=models.CASCADE)
+	parent = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 class MountOperation(models.Model):
 	oldid = models.IntegerField()
 	changedobject = models.ForeignKey(Object, on_delete=models.SET_NULL, blank=True, null=True)
 	changedtime = models.DateTimeField()
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	old_molecule = models.ForeignKey(Molecule, on_delete=models.CASCADE, blank=True, null=True, related_name='old_molecule')
 	new_molecule = models.ForeignKey(Molecule, on_delete=models.CASCADE, related_name='new_molecule')
 	comment = models.TextField()
@@ -281,7 +291,7 @@ class ObjectHistory(models.Model):
 	oldid = models.IntegerField()
 	changedobject = models.ForeignKey(Object, on_delete=models.CASCADE)
 	changedtime = models.DateTimeField()
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	hasproblems = models.BooleanField()
 	comment = models.TextField()
 	change = models.TextField(100)
@@ -291,7 +301,7 @@ class ObjectHistory(models.Model):
 class ObjectLog(models.Model):
 	oldid = models.IntegerField()
 	parentobject = models.ForeignKey(Object, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	date = models.DateTimeField()
 	content = models.TextField()
 
@@ -323,7 +333,7 @@ class PatchCableHeapLog(models.Model):
 	oldid = models.IntegerField()
 	heap = models.ForeignKey(PatchCableHeap, on_delete=models.CASCADE)
 	date = models.DateTimeField()
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	comment = models.TextField()
 
 class Plugin(models.Model):
@@ -394,7 +404,7 @@ class PortLog(models.Model):
 	oldid = models.IntegerField()
 	port = models.ForeignKey(Port, on_delete=models.CASCADE)
 	date = models.DateTimeField()
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	comment = models.TextField()
 
 class PortVLANMode(models.Model):
@@ -436,63 +446,58 @@ class Tag(models.Model):
 class TagFile(models.Model):
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagIPv4Network(models.Model):
 	ipv4net = models.ForeignKey(IPv4Network, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagIPv4RSPool(models.Model):
 	ipv4rspool = models.ForeignKey(IPv4RSPool, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagIPv4VS(models.Model):
 	ipv4vs = models.ForeignKey(IPv4VS, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagIPv6Network(models.Model):
 	ipv6network = models.ForeignKey(IPv6Network, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagLocation(models.Model):
 	location = models.ForeignKey(Location, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagObject(models.Model):
 	object = models.ForeignKey(Object, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagRack(models.Model):
 	rack = models.ForeignKey(Rack, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	name = models.TextField(50)
 	date = models.DateTimeField()
-
-class UserConfig(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	varname = models.TextField(32)
-	varvalue = models.TextField()	
 
 class VLANSTRule(models.Model):
 	oldid = models.IntegerField()
@@ -504,7 +509,7 @@ class VLANSwitchTemplate(models.Model):
 	oldid = models.IntegerField()
 	revision = models.IntegerField()
 	description = models.TextField(255)
-	modifiedby = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)	
+	modifiedby = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)	
 
 class VLANSwitch(models.Model):
 	parentobject = models.ForeignKey(Object, on_delete=models.CASCADE)
