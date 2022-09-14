@@ -284,7 +284,7 @@ class MountOperation(models.Model):
 	changedtime = models.DateTimeField()
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	old_molecule = models.ForeignKey(Molecule, on_delete=models.CASCADE, blank=True, null=True, related_name='old_molecule')
-	new_molecule = models.ForeignKey(Molecule, on_delete=models.CASCADE, related_name='new_molecule')
+	new_molecule = models.ForeignKey(Molecule, on_delete=models.CASCADE, blank=True, null=True, related_name='new_molecule')
 	comment = models.TextField()
 
 class ObjectHistory(models.Model):
