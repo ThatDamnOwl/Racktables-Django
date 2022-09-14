@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS racktables_django.032_api_filelinkipv4network_pull;
+DROP FUNCTION IF EXISTS racktables_django.034_api_filelinkipv4network_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.032_api_filelinkipv4network_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.034_api_filelinkipv4network_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN

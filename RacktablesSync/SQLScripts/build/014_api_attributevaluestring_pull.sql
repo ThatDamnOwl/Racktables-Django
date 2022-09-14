@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS racktables_django.012_api_attributevaluestring_pull;
+DROP FUNCTION IF EXISTS racktables_django.014_api_attributevaluestring_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.012_api_attributevaluestring_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.014_api_attributevaluestring_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN

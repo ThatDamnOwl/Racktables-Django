@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS racktables_django.010_api_object_pull;
+DROP FUNCTION IF EXISTS racktables_django.012_api_object_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.010_api_object_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.012_api_object_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN

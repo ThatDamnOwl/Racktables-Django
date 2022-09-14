@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS racktables_django.029_api_ipv6network_pull;
+DROP FUNCTION IF EXISTS racktables_django.031_api_ipv6network_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.029_api_ipv6network_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.031_api_ipv6network_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN

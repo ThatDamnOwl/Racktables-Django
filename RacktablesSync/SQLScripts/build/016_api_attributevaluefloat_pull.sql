@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS racktables_django.014_api_attributevaluefloat_pull;
+DROP FUNCTION IF EXISTS racktables_django.016_api_attributevaluefloat_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.014_api_attributevaluefloat_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.016_api_attributevaluefloat_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN

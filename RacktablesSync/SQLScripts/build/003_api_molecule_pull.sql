@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS racktables_django.001_api_molecule_pull;
+DROP FUNCTION IF EXISTS racktables_django.003_api_molecule_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.001_api_molecule_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.003_api_molecule_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN
