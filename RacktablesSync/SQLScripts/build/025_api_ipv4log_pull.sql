@@ -18,7 +18,7 @@ BEGIN
         FROM 
              racktables.IPv4Log COLLATE utf8_unicode_ci AS log
              LEFT JOIN racktables_django.api_ipv4address  COLLATE utf8_unicode_ci as ip on ip.oldip = log.ip
-             LEFT JOIN racktables_django.auth_user  COLLATE utf8_unicode_ci as user on user.username = log.user 
+             LEFT JOIN racktables_django.api_useraccount  COLLATE utf8_unicode_ci as user on user.username = log.user 
         WHERE 
             log.id NOT IN (SELECT oldid FROM racktables_django.api_ipv4log);
     SET inserted = (SELECT count(id) FROM racktables_django.api_ipv4log) - inserted;
