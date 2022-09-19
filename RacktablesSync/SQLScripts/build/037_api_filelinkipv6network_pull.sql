@@ -19,7 +19,7 @@ BEGIN
              LEFT JOIN racktables_django.api_ipv6network as apiobj on entity_id = apiobj.oldid
         WHERE 
             id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv6network) AND
-            entity_type = 'ipv4rspool';
+            entity_type = 'ipv6net';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkipv6network) - inserted;
     RETURN inserted;
 END;

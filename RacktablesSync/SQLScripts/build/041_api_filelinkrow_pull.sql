@@ -19,7 +19,7 @@ BEGIN
              LEFT JOIN racktables_django.api_row as apiobj on entity_id = apiobj.oldid
         WHERE 
             id NOT IN (SELECT oldid FROM racktables_django.api_filelinkrow) AND
-            entity_type = 'ipv4rspool';
+            entity_type = 'row';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkrow) - inserted;
     RETURN inserted;
 END;

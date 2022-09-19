@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS racktables_django.042_api_mountoperation_pull;
+DROP FUNCTION IF EXISTS racktables_django.043_api_mountoperation_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.042_api_mountoperation_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.043_api_mountoperation_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN
@@ -24,8 +24,7 @@ BEGIN
              LEFT JOIN racktables_django.api_molecule as napimol on napimol.oldid = MO.new_molecule_id
              LEFT JOIN racktables_django.api_useraccount as user on user.username = MO.user_name 
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_mountoperation) AND
-            entity_type = 'ipv4rspool';
+            id NOT IN (SELECT oldid FROM racktables_django.api_mountoperation)
     SET inserted = (SELECT count(id) FROM racktables_django.api_mountoperation) - inserted;
     RETURN inserted;
 END;
