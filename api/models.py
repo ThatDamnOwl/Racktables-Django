@@ -362,7 +362,7 @@ class Port(models.Model):
 	label = models.TextField(255)
 	comment = models.TextField(255)
 	l2address = models.TextField(30)
-	innerinterface = models.ForeignKey(PortInnerInterface, on_delete=models.CASCADE)
+	innerinterface = models.ForeignKey(PortInnerInterface, on_delete=models.CASCADE, blank=True, null=True)
 	outerinterface = models.ForeignKey(PortOuterInterface, on_delete=models.CASCADE)
 	patch = models.ForeignKey(PatchCableHeap, on_delete=models.SET_NULL, blank=True, null=True)
 	attachedport = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
