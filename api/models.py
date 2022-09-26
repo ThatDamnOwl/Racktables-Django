@@ -481,7 +481,7 @@ class TagLocation(models.Model):
 	date = models.DateTimeField()
 
 class TagObject(models.Model):
-	taggedobject = models.ForeignKey(Object, on_delete=models.CASCADE)
+	object = models.ForeignKey(Object, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	date = models.DateTimeField()
@@ -497,6 +497,8 @@ class VLANSTRule(models.Model):
 	rulenumber = models.IntegerField()
 	portpcre = models.TextField(255)
 	portrole = models.IntegerField(choices=choices.PortRole.choices)
+	vlans = models.TextField(255)
+	description = models.TextField(255)
 
 class VLANSwitchTemplate(models.Model):
 	oldid = models.IntegerField()
