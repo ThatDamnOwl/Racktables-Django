@@ -369,7 +369,7 @@ class Port(models.Model):
 
 class VLANDomain(models.Model):
 	oldid = models.IntegerField()
-	group = models.IntegerField()
+	parentdomain = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
 	description = models.TextField(255)
 
 class VLANDescription(models.Model):
@@ -417,13 +417,14 @@ class RackObject(models.Model):
 	label = models.TextField(255)
 	objecttype = models.ForeignKey(ObjectType, on_delete=models.CASCADE)
 	assetno = models.TextField(64)
+	linkedobject = models.ForeignKey(Object, on_delete=models.SET_NULL, blank=True, null=True)
 	hasproblems= models.BooleanField()
 	comment = models.TextField()
 
 class RackSpace(models.Model):
 	rack = models.ForeignKey(Rack, on_delete=models.CASCADE)
 	unitno = models.IntegerField()
-	molecule = models.ForeignKey(Molecule, on_delete=models.CASCADE)
+	atom = models.ForeignKey(Atom, on_delete=models.CASCADE)
 	state = models.BooleanField()
 	parentobject = models.ForeignKey(Object, on_delete=models.SET_NULL, blank=True, null=True)
 
