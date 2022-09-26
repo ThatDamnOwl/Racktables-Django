@@ -25,7 +25,7 @@ BEGIN
              LEFT JOIN racktables_django.api_portinnerinterface as ii on ii.oldid = p.iif_id
              LEFT JOIN racktables_django.api_portinterfacecompat as oi on ii.id = oi.portinnerinterface_id
              LEFT JOIN racktables_django.api_object as po on po.oldid = p.object_id
-            concat(pct.id,"-",poi.id) NOT IN (SELECT concat(cabletype_id,"-",interfacetype_id) FROM racktables_django.api_port)
+            concat(pct.id,"-",poi.id) NOT IN (SELECT concat(cabletype_id,"-",interfacetype_id) FROM racktables_django.api_port);
     SET inserted = (SELECT count(id) FROM racktables_django.api_port) - inserted;
     RETURN inserted;
 END;
