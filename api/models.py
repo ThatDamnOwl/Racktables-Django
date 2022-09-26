@@ -448,56 +448,48 @@ class TagFile(models.Model):
 	file = models.ForeignKey(File, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
-	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagIPv4Network(models.Model):
 	ipv4net = models.ForeignKey(IPv4Network, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
-	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagIPv4RSPool(models.Model):
 	ipv4rspool = models.ForeignKey(IPv4RSPool, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
-	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagIPv4VS(models.Model):
 	ipv4vs = models.ForeignKey(IPv4VS, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
-	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagIPv6Network(models.Model):
 	ipv6network = models.ForeignKey(IPv6Network, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
-	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagLocation(models.Model):
 	location = models.ForeignKey(Location, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
-	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagObject(models.Model):
-	object = models.ForeignKey(Object, on_delete=models.CASCADE)
+	taggedobject = models.ForeignKey(Object, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
-	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class TagRack(models.Model):
 	rack = models.ForeignKey(Rack, on_delete=models.CASCADE)
 	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
-	name = models.TextField(50)
 	date = models.DateTimeField()
 
 class VLANSTRule(models.Model):
