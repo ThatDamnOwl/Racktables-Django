@@ -7,7 +7,7 @@ class UserAccount(models.Model):
 	oldid = models.IntegerField()
 	username = models.TextField(64)
 	realname = models.TextField(64)
-	old_passhah = models.TextField(40)
+	old_passhash = models.TextField(40)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class UserConfig(models.Model):
