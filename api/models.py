@@ -288,14 +288,16 @@ class MountOperation(models.Model):
 	comment = models.TextField()
 
 class ObjectHistory(models.Model):
+	oldeventid = models.IntegerField()
 	oldid = models.IntegerField()
+	name = models.TextField(255)
+	label = models.TextField(255)
 	changedobject = models.ForeignKey(Object, on_delete=models.CASCADE)
+	assetno = models.TextField(64)
 	changedtime = models.DateTimeField()
 	user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, blank=True, null=True)
 	hasproblems = models.BooleanField()
 	comment = models.TextField()
-	change = models.TextField(100)
-	oldvalue = models.TextField()
 	
 
 class ObjectLog(models.Model):
@@ -307,12 +309,12 @@ class ObjectLog(models.Model):
 
 class PatchCableConnector(models.Model):
 	oldid = models.IntegerField()
-	default = models.BooleanField()
+	defaultvalue = models.BooleanField()
 	connectorname = models.TextField(32)
 
 class PatchCableType(models.Model):
 	oldid = models.IntegerField()
-	default = models.BooleanField()
+	defaultvalue = models.BooleanField()
 	cabletype = models.TextField()
 
 class PatchCableConnectorCompat(models.Model):
