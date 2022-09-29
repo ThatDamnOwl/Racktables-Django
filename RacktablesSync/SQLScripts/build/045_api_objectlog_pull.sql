@@ -16,9 +16,9 @@ BEGIN
               ,apiobj.id
               ,user.id
         FROM 
-             racktables.ObjectHistory as OL
+             racktables.ObjectLog as OL
              LEFT JOIN racktables_django.api_object as apiobj on apiobj.oldid = OL.object_id
-             LEFT JOIN racktables_django.api_useraccount as user on user.username = OL.user_name 
+             LEFT JOIN racktables_django.api_useraccount as user on user.username = OL.user COLLATE utf8_unicode_ci
         WHERE 
             OL.id NOT IN (SELECT oldid FROM racktables_django.api_objectlog);
     SET inserted = (SELECT count(id) FROM racktables_django.api_objectlog) - inserted;

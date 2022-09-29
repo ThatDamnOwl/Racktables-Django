@@ -12,33 +12,31 @@ BEGIN
         SELECT 
              ''
             ,0
-            ,user_name
-            ,user_realname
+            ,old.user_name
+            ,old.user_realname
             ,''
             ,''
             ,1
             ,1
             ,NOW()
-        FROM racktables.UserAccount
+        FROM racktables.UserAccount old
+             LEFT JOIN racktables_django.auth_user au on au.username = old.user_name COLLATE utf8_general_ci
         WHERE 
-            user_name not in (
-                SELECT username
-                FROM racktables_django.auth_user
-            );
+            IFNULL(au.username,'NULL USER') = 'NULL USER';
     INSERT INTO
-        racktables_django.api_useraccount (oldid, username, realname, old_passhash, user)
+        racktables_django.api_useraccount (oldid, username, realname, old_passhash, user_id)
         SELECT 
-             UA.id
+             UA.user_id
             ,user_name
             ,user_realname
-            ,passhash
+            ,user_password_hash
             ,user.id
         FROM
             racktables.UserAccount as UA
-            LEFT JOIN racktables_django.auth_user as user on user.username = UA.user_name
+            LEFT JOIN racktables_django.auth_user as user on user.username = UA.user_name COLLATE utf8_general_ci
         WHERE 
-            UA.id not in (
-                SELECT id
+            UA.user_id not in (
+                SELECT oldid
                 FROM racktables_django.api_useraccount
             );
     SET inserted = (SELECT count(id) FROM racktables_django.api_useraccount) - inserted;

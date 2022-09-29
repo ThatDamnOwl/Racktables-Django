@@ -20,7 +20,8 @@ BEGIN
             END
             ,description
         FROM 
-             racktables.VLANDomain
+             racktables.VLANDescription old 
+             LEFT JOIN racktables_django.api_vlandomain as domain on old.domain_id = domain.oldid
         WHERE 
             concat(domain.id,"-",vlan_id) NOT IN (SELECT concat(domain_id,"-",vlan_id) FROM racktables_django.api_vlandescription);
 

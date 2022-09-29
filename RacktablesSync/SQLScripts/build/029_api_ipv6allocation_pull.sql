@@ -26,9 +26,9 @@ BEGIN
             LEFT JOIN racktables_django.api_ipv6address as ipa on ipal.ip = ipa.oldip
             LEFT JOIN racktables_django.api_object as obj on object_id = obj.oldid
         where
-            concat(ipal.name,"-",ipal.ip,"-",object_id) COLLATE utf8_unicode_ci NOT IN (
+            concat(ipal.name,"-",ipa.ip,"-",object_id) COLLATE utf8_unicode_ci NOT IN (
                 SELECT 
-                    concat(ipal.name,"-",ipa.oldip,"-",obj.oldid) COLLATE utf8_unicode_ci
+                    concat(ipal.name,"-",ipa.ip,"-",obj.oldid) COLLATE utf8_unicode_ci
                 FROM
                     racktables_django.api_ipv6allocation as ipal
                     LEFT JOIN racktables_django.api_ipv6address as ipa on ip_id = ipa.id

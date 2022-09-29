@@ -8,7 +8,7 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_plugin);
     INSERT INTO 
-        racktables_django.api_plugin (oldid,name,longname,version,homeurl,state) 
+        racktables_django.api_plugin (name,longname,version,homeurl,state) 
         SELECT 
              name
             ,longname
@@ -18,7 +18,7 @@ BEGIN
         FROM 
              racktables.Plugin
         WHERE 
-            name NOT IN (SELECT name FROM racktables_django.api_plugin);
+            name NOT IN (SELECT name COLLATE utf8_general_ci FROM racktables_django.api_plugin);
     SET inserted = (SELECT count(id) FROM racktables_django.api_plugin) - inserted;
     RETURN inserted;
 END;

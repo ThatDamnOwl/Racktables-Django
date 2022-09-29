@@ -12,21 +12,21 @@ BEGIN
         SELECT 
                ObjectHistory.event_id
               ,ObjectHistory.id
-              ,ObjectHistory.name
-              ,ObjectHistory.label
-              ,CO.id
-              ,ObjectHistory.asset_no
+              ,ifnull(ObjectHistory.name,'')
+              ,ifnull(ObjectHistory.label,'')
+              ,apiobj.id
+              ,ifnull(ObjectHistory.asset_no,'')
               ,ctime
-              ,US.id
+              ,user.id
               ,CASE
                 WHEN has_problems = 'yes' THEN 1
                 ELSE 0
               END
-              ,ObjectHistory.comment
+              ,ifnull(ObjectHistory.comment,'')
         FROM 
              racktables.ObjectHistory
              LEFT JOIN racktables_django.api_object as apiobj on apiobj.oldid = ObjectHistory.id
-             LEFT JOIN racktables_django.api_useraccount as user on user.username = ObjectHistory.user_name 
+             LEFT JOIN racktables_django.api_useraccount as user on user.username = ObjectHistory.user_name COLLATE utf8_general_ci
         WHERE 
             ObjectHistory.event_id NOT IN (SELECT oldid FROM racktables_django.api_objecthistory);
     SET inserted = (SELECT count(id) FROM racktables_django.api_objecthistory) - inserted;

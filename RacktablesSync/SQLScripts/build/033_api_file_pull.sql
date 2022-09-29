@@ -7,8 +7,10 @@ NOT DETERMINISTIC
 BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_file);
+
+
     INSERT INTO 
-        racktables_django.api_file (oldid, name, created, size, modified, accessed, thumbnail, content, comment)
+        racktables_django.api_file (oldid, name, created, size, modified, accessed, thumbnail, content, comment, filetype)
         SELECT 
                id
               ,name
@@ -19,6 +21,7 @@ BEGIN
               ,thumbnail
               ,contents
               ,ifnull(comment,'')
+              ,type
         FROM 
              racktables.File
         WHERE 

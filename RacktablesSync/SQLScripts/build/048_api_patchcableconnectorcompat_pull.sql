@@ -14,10 +14,10 @@ BEGIN
              pcc.id
         FROM 
              racktables.PatchCableConnectorCompat as pccc
-             LEFT JOIN racktables_django.PatchCableConnector as pcc on pccc.connector_id = pcc.oldid
-             LEFT JOIN racktables_django.PatchCableType as pct on pccc.pctype_id = pct.oldid
+             LEFT JOIN racktables_django.api_patchcableconnector as pcc on pccc.connector_id = pcc.oldid
+             LEFT JOIN racktables_django.api_patchcabletype as pct on pccc.pctype_id = pct.oldid
         WHERE 
-            contact(pct.id,"-",pcc.id) NOT IN (SELECT contact(cabletype_id,"-",connector_id) FROM racktables_django.api_patchcableconnectorcompat);
+            concat(pct.id,"-",pcc.id) NOT IN (SELECT concat(cabletype_id,"-",connector_id) FROM racktables_django.api_patchcableconnectorcompat);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableconnectorcompat) - inserted;
     RETURN inserted;
 END;

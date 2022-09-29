@@ -9,20 +9,20 @@ BEGIN
     SET inserted = (SELECT count(id) FROM racktables_django.api_ipv4rs);
     INSERT INTO racktables_django.api_ipv4rs (oldid,inservice,oldrsip,rsport,rspool_id,rsip_id,rsconfig,comment)
     SELECT 
-           rs.id
+           old.id
           ,CASE
               WHEN inservice = 'yes' THEN 1
               ELSE 0
-          END 
-          ,rs.rsip
-          ,rs.rsport
-          ,rspool.id
-          ,ip.id
-          ,rs.rsconfig
-          ,rs.comment
+          END as inservice
+          ,old.rsip
+          ,old.rsport
+          ,rs.id as rs_id
+          ,ip.id as ip_id
+          ,old.rsconfig
+          ,old.comment
     FROM
-        racktables.IPv4RS AS rs
-        LEFT JOIN racktables_django.api_ipv4address as ip on ip.ip = racktables_django.parse_ipv4toint(racktables_django.parse_ipbin(rsip))
+        racktables.IPv4RS AS old
+        LEFT JOIN racktables_django.api_ipv4address as ip on ip.ip = concat('::ffff:',INET6_NTOA(rsip))
         LEFT JOIN racktables_django.api_ipv4rspool as rs on rs.oldid = rspool_id
     WHERE
         rs.id NOT IN (select oldid from racktables_django.api_ipv4rs);

@@ -8,7 +8,7 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlandomain);
     INSERT INTO 
-        racktables_django.api_vlandomain (oldid,parentdomain,description) 
+        racktables_django.api_vlandomain (oldid,parentdomain_id,description) 
         SELECT 
              id
             ,null
@@ -23,7 +23,7 @@ BEGIN
         ,racktables.VLANDomain as OldDomain
         ,racktables_django.api_vlandomain as ParentDomain
     SET
-        BaseDomain.parentdomain = ParentDomain.id
+        BaseDomain.parentdomain_id = ParentDomain.id
     WHERE 
         BaseDomain.oldid = OldDomain.id AND
         ParentDomain.oldid = OldDomain.group_id;

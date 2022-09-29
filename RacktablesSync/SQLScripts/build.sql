@@ -1,3 +1,7 @@
+
+
+ ## 000_Build_DB.sql ##
+
 USE racktables_django;
 
 DROP FUNCTION IF EXISTS racktables_django.parse_ipbin;
@@ -58,6 +62,10 @@ END;
 $$
 DELIMITER ;
 
+
+
+ ## 001_api_useraccount_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.001_api_useraccount_pull;
 
 DELIMITER $$
@@ -72,33 +80,31 @@ BEGIN
         SELECT 
              ''
             ,0
-            ,user_name
-            ,user_realname
+            ,old.user_name
+            ,old.user_realname
             ,''
             ,''
             ,1
             ,1
             ,NOW()
-        FROM racktables.UserAccount
+        FROM racktables.UserAccount old
+             LEFT JOIN racktables_django.auth_user au on au.username = old.user_name COLLATE utf8_general_ci
         WHERE 
-            user_name not in (
-                SELECT username
-                FROM racktables_django.auth_user
-            );
+            IFNULL(au.username,'NULL USER') = 'NULL USER';
     INSERT INTO
-        racktables_django.api_useraccount (oldid, username, realname, old_passhash, user)
+        racktables_django.api_useraccount (oldid, username, realname, old_passhash, user_id)
         SELECT 
-             UA.id
+             UA.user_id
             ,user_name
             ,user_realname
-            ,passhash
+            ,user_password_hash
             ,user.id
         FROM
             racktables.UserAccount as UA
-            LEFT JOIN racktables_django.auth_user as user on user.username = UA.user_name
+            LEFT JOIN racktables_django.auth_user as user on user.username = UA.user_name COLLATE utf8_general_ci
         WHERE 
-            UA.id not in (
-                SELECT id
+            UA.user_id not in (
+                SELECT oldid
                 FROM racktables_django.api_useraccount
             );
     SET inserted = (SELECT count(id) FROM racktables_django.api_useraccount) - inserted;
@@ -106,6 +112,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 002_api_userconfig_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.002_api_userconfig_pull;
 
 DELIMITER $$
@@ -122,10 +132,10 @@ BEGIN
             ,varvalue
             ,UA.id
         FROM racktables.UserConfig as UC
-            LEFT JOIN racktables_django.api_useraccount as UA on UA.username = UC.user
+            LEFT JOIN racktables_django.api_useraccount as UA on UA.username = UC.user COLLATE utf8_unicode_ci
         WHERE 
             concat(varname,"-",UA.id) not in (
-                SELECT concat(varname,"-",user_id)
+                SELECT concat(varname,"-",user_id) COLLATE utf8_unicode_ci
                 FROM racktables_django.api_userconfig
             );
     SET inserted = (SELECT count(id) FROM racktables_django.api_userconfig) - inserted;
@@ -133,6 +143,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 003_api_molecule_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.003_api_molecule_pull;
 
 DELIMITER $$
@@ -158,6 +172,9 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 004_api_location_pull.sql ##
 
 DROP FUNCTION IF EXISTS racktables_django.004_api_location_pull;
 
@@ -202,6 +219,9 @@ END;
 $$
 DELIMITER ;
 
+
+ ## 005_api_row_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.005_api_row_pull;
 
 DELIMITER $$
@@ -228,6 +248,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 006_api_rack_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.006_api_rack_pull;
 
 DELIMITER $$
@@ -264,6 +288,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 007_api_atom_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.007_api_atom_pull;
 
 DELIMITER $$
@@ -313,6 +341,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 008_api_attribute_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.008_api_attribute_pull;
 
 DELIMITER $$
@@ -347,6 +379,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 009_api_chapter_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.009_api_chapter_pull;
 
 DELIMITER $$
@@ -378,6 +414,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 010_api_dictionary_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.010_api_dictionary_pull;
 
 DELIMITER $$
@@ -410,6 +450,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 011_api_objecttype_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.011_api_objecttype_pull;
 
 DELIMITER $$
@@ -443,6 +487,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 012_api_object_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.012_api_object_pull;
 
 DELIMITER $$
@@ -480,6 +528,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 013_api_attributemap_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.013_api_attributemap_pull;
 
 DELIMITER $$
@@ -519,6 +571,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 014_api_attributevaluestring_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.014_api_attributevaluestring_pull;
 
 DELIMITER $$
@@ -562,6 +618,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 015_api_attributevalueint_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.015_api_attributevalueint_pull;
 
 DELIMITER $$
@@ -605,6 +665,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 016_api_attributevaluefloat_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.016_api_attributevaluefloat_pull;
 
 DELIMITER $$
@@ -648,6 +712,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 017_api_attributevaluedict_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.017_api_attributevaluedict_pull;
 
 DELIMITER $$
@@ -691,6 +759,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 018_api_attributevaluedate_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.018_api_attributevaluedate_pull;
 
 DELIMITER $$
@@ -734,6 +806,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 019_api_ipv4address_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.019_api_ipv4address_pull;
 
 DELIMITER $$
@@ -800,7 +876,17 @@ BEGIN
         WHERE  
             ip not in (select oldip from racktables_django.api_ipv4address)
         GROUP BY ip;
-
+    INSERT INTO racktables_django.api_ipv4address (ip,name,comment,reserved,oldip)
+        SELECT 
+               concat('::ffff:',INET6_NTOA(rsip))
+              ,old.comment
+              ,''
+              ,1
+              ,INET_ATON(INET6_NTOA(rsip))
+        FROM
+            racktables.IPv4RS AS old
+        WHERE
+            concat('::ffff:',INET6_NTOA(rsip)) NOT IN (select ip from racktables_django.api_ipv4address);
     SET inserted = (SELECT count(id) FROM racktables_django.api_ipv4address) - inserted;
     RETURN inserted;
 END;
@@ -808,6 +894,10 @@ END;
 $$
 
 DELIMITER ;
+
+
+ ## 020_api_ipv4vs_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.020_api_ipv4vs_pull;
 
 DELIMITER $$
@@ -859,6 +949,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 021_api_ipv4allocation_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.021_api_ipv4allocation_pull;
 
 DELIMITER $$
@@ -902,6 +996,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 022_api_ipv4rspool_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.022_api_ipv4rspool_pull;
 
 DELIMITER $$
@@ -929,6 +1027,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 023_api_ipv4rs_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.023_api_ipv4rs_pull;
 
 DELIMITER $$
@@ -940,20 +1042,20 @@ BEGIN
     SET inserted = (SELECT count(id) FROM racktables_django.api_ipv4rs);
     INSERT INTO racktables_django.api_ipv4rs (oldid,inservice,oldrsip,rsport,rspool_id,rsip_id,rsconfig,comment)
     SELECT 
-           rs.id
+           old.id
           ,CASE
               WHEN inservice = 'yes' THEN 1
               ELSE 0
-          END 
-          ,rs.rsip
-          ,rs.rsport
-          ,rspool.id
-          ,ip.id
-          ,rs.rsconfig
-          ,rs.comment
+          END as inservice
+          ,old.rsip
+          ,old.rsport
+          ,rs.id as rs_id
+          ,ip.id as ip_id
+          ,old.rsconfig
+          ,old.comment
     FROM
-        racktables.IPv4RS AS rs
-        LEFT JOIN racktables_django.api_ipv4address as ip on ip.ip = racktables_django.parse_ipv4toint(racktables_django.parse_ipbin(rsip))
+        racktables.IPv4RS AS old
+        LEFT JOIN racktables_django.api_ipv4address as ip on ip.ip = concat('::ffff:',INET6_NTOA(rsip))
         LEFT JOIN racktables_django.api_ipv4rspool as rs on rs.oldid = rspool_id
     WHERE
         rs.id NOT IN (select oldid from racktables_django.api_ipv4rs);
@@ -963,6 +1065,10 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+
+ ## 024_api_ipv4lb_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.024_api_ipv4lb_pull;
 
 DELIMITER $$
@@ -996,6 +1102,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 025_api_ipv4log_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.025_api_ipv4log_pull;
 
 DELIMITER $$
@@ -1024,6 +1134,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 026_api_ipv4nat_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.026_api_ipv4nat_pull;
 
 DELIMITER $$
@@ -1057,6 +1171,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 027_api_ipv4network_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.027_api_ipv4network_pull;
 
 DELIMITER $$
@@ -1084,10 +1202,14 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
-DROP FUNCTION IF EXISTS racktables_django.028_api_ipv6allocation_pull;
+
+
+ ## 028_api_ipv6address_pull.sql ##
+
+DROP FUNCTION IF EXISTS racktables_django.028_api_ipv6address_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.028_api_ipv6allocation_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.028_api_ipv6address_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN
@@ -1140,6 +1262,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 029_api_ipv6allocation_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.029_api_ipv6allocation_pull;
 
 DELIMITER $$
@@ -1168,9 +1294,9 @@ BEGIN
             LEFT JOIN racktables_django.api_ipv6address as ipa on ipal.ip = ipa.oldip
             LEFT JOIN racktables_django.api_object as obj on object_id = obj.oldid
         where
-            concat(ipal.name,"-",ipal.ip,"-",object_id) COLLATE utf8_unicode_ci NOT IN (
+            concat(ipal.name,"-",ipa.ip,"-",object_id) COLLATE utf8_unicode_ci NOT IN (
                 SELECT 
-                    concat(ipal.name,"-",ipa.oldip,"-",obj.oldid) COLLATE utf8_unicode_ci
+                    concat(ipal.name,"-",ipa.ip,"-",obj.oldid) COLLATE utf8_unicode_ci
                 FROM
                     racktables_django.api_ipv6allocation as ipal
                     LEFT JOIN racktables_django.api_ipv6address as ipa on ip_id = ipa.id
@@ -1180,6 +1306,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 030_api_ipv6log_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.030_api_ipv6log_pull;
 
 DELIMITER $$
@@ -1199,7 +1329,7 @@ BEGIN
             ,user.id
         FROM 
              racktables.IPv6Log AS log
-             LEFT JOIN racktables_django.api_ipv4address as ip on ip.oldip = log.ip
+             LEFT JOIN racktables_django.api_ipv6address as ip on ip.oldip = log.ip
              LEFT JOIN racktables_django.api_useraccount as user on user.username = log.user COLLATE utf8_unicode_ci 
         WHERE 
             log.id NOT IN (SELECT oldid FROM racktables_django.api_ipv6log);
@@ -1208,6 +1338,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 031_api_ipv6network_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.031_api_ipv6network_pull;
 
 DELIMITER $$
@@ -1218,7 +1352,7 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_ipv6network);
     INSERT INTO 
-        racktables_django.api_ipv6network (oldid,ip,oldip,mask,last_ip,oldlastip,name,comment) 
+        racktables_django.api_ipv6network (oldid,ip,oldip,mask,lastip,oldlastip,name,comment) 
         SELECT 
               id
              ,INET6_NTOA(ip)
@@ -1237,6 +1371,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 032_api_config_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.032_api_config_pull;
 
 DELIMITER $$
@@ -1277,6 +1415,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 033_api_file_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.033_api_file_pull;
 
 DELIMITER $$
@@ -1286,8 +1428,10 @@ NOT DETERMINISTIC
 BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_file);
+
+
     INSERT INTO 
-        racktables_django.api_file (oldid, name, created, size, modified, accessed, thumbnail, content, comment)
+        racktables_django.api_file (oldid, name, created, size, modified, accessed, thumbnail, content, comment, filetype)
         SELECT 
                id
               ,name
@@ -1298,6 +1442,7 @@ BEGIN
               ,thumbnail
               ,contents
               ,ifnull(comment,'')
+              ,type
         FROM 
              racktables.File
         WHERE 
@@ -1307,6 +1452,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 034_api_filelinkipv4network_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.034_api_filelinkipv4network_pull;
 
 DELIMITER $$
@@ -1319,21 +1468,25 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinkipv4network (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_ipv4network as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv4network) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv4network) AND
             entity_type = 'ipv4net';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkipv4network) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 035_api_filelinkipv4rspool_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.035_api_filelinkipv4rspool_pull;
 
 DELIMITER $$
@@ -1346,21 +1499,25 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinkipv4rspool (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_ipv4rspool as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv4rspool) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv4rspool) AND
             entity_type = 'ipv4rspool';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkipv4rspool) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 036_api_filelinkipv4vs_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.036_api_filelinkipv4vs_pull;
 
 DELIMITER $$
@@ -1373,21 +1530,25 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinkipv4vs (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_ipv4vs as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv4vs) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv4vs) AND
             entity_type = 'ipv4vs';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkipv4vs) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 037_api_filelinkipv6network_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.037_api_filelinkipv6network_pull;
 
 DELIMITER $$
@@ -1400,21 +1561,25 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinkipv6network (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_ipv6network as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv6network) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv6network) AND
             entity_type = 'ipv6net';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkipv6network) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 038_api_filelinklocation_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.038_api_filelinklocation_pull;
 
 DELIMITER $$
@@ -1427,21 +1592,25 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinklocation (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_location as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinklocation) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinklocation) AND
             entity_type = 'location';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinklocation) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 039_api_filelinkobject_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.039_api_filelinkobject_pull;
 
 DELIMITER $$
@@ -1454,21 +1623,25 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinkobject (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_object as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinkobject) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinkobject) AND
             entity_type = 'object';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkobject) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 040_api_filelinkrack_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.040_api_filelinkrack_pull;
 
 DELIMITER $$
@@ -1481,21 +1654,25 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinkrack (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_rack as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinkrack) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinkrack) AND
             entity_type = 'rack';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkrack) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 041_api_filelinkrow_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.041_api_filelinkrow_pull;
 
 DELIMITER $$
@@ -1508,21 +1685,25 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinkrow (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_row as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinkrow) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinkrow) AND
             entity_type = 'row';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkrow) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 042_api_filelinkuser_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.042_api_filelinkuser_pull;
 
 DELIMITER $$
@@ -1535,21 +1716,25 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinkuser (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_useraccount as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinkuser) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinkuser) AND
             entity_type = 'user';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkuser) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 043_api_mountoperation_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.043_api_mountoperation_pull;
 
 DELIMITER $$
@@ -1562,26 +1747,30 @@ BEGIN
     INSERT INTO 
         racktables_django.api_mountoperation (oldid,changedtime,comment,changedobject_id,new_molecule_id,old_molecule_id,user_id) 
         SELECT 
-               MO.id
-              ,MO.ctime
-              ,MO.comment
+               old.id
+              ,old.ctime
+              ,ifnull(old.comment,'')
               ,apiobj.id
               ,oapimol.id
               ,napimol.id
               ,user.id
         FROM 
-             racktables.MountOperation as MO
-             LEFT JOIN racktables_django.api_object as apiobj on apiobj.oldid = MO.object_id
-             LEFT JOIN racktables_django.api_molecule as oapimol on oapimol.oldid = MO.old_molecule_id
-             LEFT JOIN racktables_django.api_molecule as napimol on napimol.oldid = MO.new_molecule_id
-             LEFT JOIN racktables_django.api_useraccount as user on user.username = MO.user_name 
+             racktables.MountOperation as old
+             LEFT JOIN racktables_django.api_object as apiobj on apiobj.oldid = old.object_id
+             LEFT JOIN racktables_django.api_molecule as oapimol on oapimol.oldid = old.old_molecule_id
+             LEFT JOIN racktables_django.api_molecule as napimol on napimol.oldid = old.new_molecule_id
+             LEFT JOIN racktables_django.api_useraccount as user on user.username = old.user_name COLLATE utf8_general_ci
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_mountoperation);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_mountoperation);
     SET inserted = (SELECT count(id) FROM racktables_django.api_mountoperation) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 044_api_objecthistory_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.044_api_objecthistory_pull;
 
 DELIMITER $$
@@ -1596,21 +1785,21 @@ BEGIN
         SELECT 
                ObjectHistory.event_id
               ,ObjectHistory.id
-              ,ObjectHistory.name
-              ,ObjectHistory.label
-              ,CO.id
-              ,ObjectHistory.asset_no
+              ,ifnull(ObjectHistory.name,'')
+              ,ifnull(ObjectHistory.label,'')
+              ,apiobj.id
+              ,ifnull(ObjectHistory.asset_no,'')
               ,ctime
-              ,US.id
+              ,user.id
               ,CASE
                 WHEN has_problems = 'yes' THEN 1
                 ELSE 0
               END
-              ,ObjectHistory.comment
+              ,ifnull(ObjectHistory.comment,'')
         FROM 
              racktables.ObjectHistory
              LEFT JOIN racktables_django.api_object as apiobj on apiobj.oldid = ObjectHistory.id
-             LEFT JOIN racktables_django.api_useraccount as user on user.username = ObjectHistory.user_name 
+             LEFT JOIN racktables_django.api_useraccount as user on user.username = ObjectHistory.user_name COLLATE utf8_general_ci
         WHERE 
             ObjectHistory.event_id NOT IN (SELECT oldid FROM racktables_django.api_objecthistory);
     SET inserted = (SELECT count(id) FROM racktables_django.api_objecthistory) - inserted;
@@ -1618,6 +1807,9 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 045_api_objectlog_pull.sql ##
 
 DROP FUNCTION IF EXISTS racktables_django.045_api_objectlog_pull;
 
@@ -1637,9 +1829,9 @@ BEGIN
               ,apiobj.id
               ,user.id
         FROM 
-             racktables.ObjectHistory as OL
+             racktables.ObjectLog as OL
              LEFT JOIN racktables_django.api_object as apiobj on apiobj.oldid = OL.object_id
-             LEFT JOIN racktables_django.api_useraccount as user on user.username = OL.user_name 
+             LEFT JOIN racktables_django.api_useraccount as user on user.username = OL.user COLLATE utf8_unicode_ci
         WHERE 
             OL.id NOT IN (SELECT oldid FROM racktables_django.api_objectlog);
     SET inserted = (SELECT count(id) FROM racktables_django.api_objectlog) - inserted;
@@ -1647,6 +1839,9 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 046_api_patchcableconnector_pull.sql ##
 
 DROP FUNCTION IF EXISTS racktables_django.046_api_patchcableconnector_pull;
 
@@ -1676,6 +1871,9 @@ END;
 $$ 
 DELIMITER ;
 
+
+ ## 047_api_patchcabletype_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.047_api_patchcabletype_pull;
 
 DELIMITER $$
@@ -1703,6 +1901,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 048_api_patchcableconnectorcompat_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.048_api_patchcableconnectorcompat_pull;
 
 DELIMITER $$
@@ -1719,15 +1921,19 @@ BEGIN
              pcc.id
         FROM 
              racktables.PatchCableConnectorCompat as pccc
-             LEFT JOIN racktables_django.PatchCableConnector as pcc on pccc.connector_id = pcc.oldid
-             LEFT JOIN racktables_django.PatchCableType as pct on pccc.pctype_id = pct.oldid
+             LEFT JOIN racktables_django.api_patchcableconnector as pcc on pccc.connector_id = pcc.oldid
+             LEFT JOIN racktables_django.api_patchcabletype as pct on pccc.pctype_id = pct.oldid
         WHERE 
-            contact(pct.id,"-",pcc.id) NOT IN (SELECT contact(cabletype_id,"-",connector_id) FROM racktables_django.api_patchcableconnectorcompat);
+            concat(pct.id,"-",pcc.id) NOT IN (SELECT concat(cabletype_id,"-",connector_id) FROM racktables_django.api_patchcableconnectorcompat);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableconnectorcompat) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 049_api_patchcableheap_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.049_api_patchcableheap_pull;
 
 DELIMITER $$
@@ -1740,26 +1946,30 @@ BEGIN
     INSERT INTO 
         racktables_django.api_patchcableheap (oldid,amount,colour,length,description,cabletype_id,end1_id,end2_id) 
         SELECT 
-             id
-            ,amount
+             old.id
+            ,old.amount
             ,(X'000000')
-            ,length
-            ,description
+            ,old.length
+            ,old.description
             ,pct.id
             ,pcc1.id
             ,pcc2.id
         FROM 
-             racktables.PatchCableHeap
+             racktables.PatchCableHeap as old
              LEFT JOIN racktables_django.api_patchcabletype as pct on pct.oldid = pctype_id
              LEFT JOIN racktables_django.api_patchcableconnector as pcc1 on pcc1.oldid = end1_conn_id
              LEFT JOIN racktables_django.api_patchcableconnector as pcc2 on pcc2.oldid = end2_conn_id
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheap);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheap);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableheap) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 050_api_patchcableheaplog_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.050_api_patchcableheaplog_pull;
 
 DELIMITER $$
@@ -1772,22 +1982,26 @@ BEGIN
     INSERT INTO 
         racktables_django.api_patchcableheaplog (oldid,date,comment,heap_id,user_id) 
         SELECT 
-             phcl.id
+             old.id
             ,date
-            ,comment
+            ,old.message
             ,pch.id
             ,ua.id
         FROM 
-             racktables.PatchCableHeapLog as pchl
+             racktables.PatchCableHeapLog as old
              LEFT JOIN racktables_django.api_patchcableheap as pch on heap_id = pch.oldid
              LEFT JOIN racktables_django.api_useraccount as ua on user_id = ua.id
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheaplog);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheaplog);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableheaplog) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 051_api_plugin_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.051_api_plugin_pull;
 
 DELIMITER $$
@@ -1798,7 +2012,7 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_plugin);
     INSERT INTO 
-        racktables_django.api_plugin (oldid,name,longname,version,homeurl,state) 
+        racktables_django.api_plugin (name,longname,version,homeurl,state) 
         SELECT 
              name
             ,longname
@@ -1808,12 +2022,16 @@ BEGIN
         FROM 
              racktables.Plugin
         WHERE 
-            name NOT IN (SELECT name FROM racktables_django.api_plugin);
+            name NOT IN (SELECT name COLLATE utf8_general_ci FROM racktables_django.api_plugin);
     SET inserted = (SELECT count(id) FROM racktables_django.api_plugin) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 052_api_portinnerinterface_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.052_api_portinnerinterface_pull;
 
 DELIMITER $$
@@ -1837,6 +2055,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 053_api_portouterinterface_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.053_api_portouterinterface_pull;
 
 DELIMITER $$
@@ -1860,6 +2082,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 054_api_patchcableoifcompat_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.054_api_patchcableoifcompat_pull;
 
 DELIMITER $$
@@ -1872,12 +2098,12 @@ BEGIN
     INSERT INTO 
         racktables_django.api_patchcableoifcompat (cabletype_id,interfacetype_id) 
         SELECT 
-             pct.id
-            ,poi.id
+             pct.id as pct_id
+            ,poi.id as poi_id
         FROM 
-             racktables.PatchCableOIFCompat
-             LEFT JOIN racktables_django.api_portouterinterface as poi on poi.oldid = interfacetype_id
-             LEFT JOIN racktables_django.api_patchcabletype as pct on pct.oldid = cabletype_id
+             racktables.PatchCableOIFCompat as old
+             LEFT JOIN racktables_django.api_portouterinterface as poi on poi.oldid = old.oif_id
+             LEFT JOIN racktables_django.api_patchcabletype as pct on pct.oldid = old.pctype_id
         WHERE 
             concat(pct.id,"-",poi.id) NOT IN (SELECT concat(cabletype_id,"-",interfacetype_id) FROM racktables_django.api_patchcableoifcompat);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableoifcompat) - inserted;
@@ -1885,6 +2111,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 055_api_portcompat_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.055_api_portcompat_pull;
 
 DELIMITER $$
@@ -1910,6 +2140,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 056_api_portinterfacecompat_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.056_api_portinterfacecompat_pull;
 
 DELIMITER $$
@@ -1921,20 +2155,24 @@ BEGIN
     SET inserted = (SELECT count(id) FROM racktables_django.api_portinterfacecompat);
     INSERT INTO 
         racktables_django.api_portinterfacecompat (portinnerinterface_id,portouterinterface_id) 
-        SELECT 
-             pii.id
-            ,poi.id
+        SELECT
+             pii.id n_iif_id
+            ,poi.id n_oif_id
         FROM 
-             racktables.PortInterfaceCompat
-             LEFT JOIN racktables_django.api_portouterinterface as pii on pii.oldid = iif_id
-             LEFT JOIN racktables_django.api_portinnerinterface as poi on poi.oldid = oif_id
+             racktables.PortInterfaceCompat pic
+             LEFT JOIN racktables_django.api_portinnerinterface as pii on pii.oldid = iif_id
+             LEFT JOIN racktables_django.api_portouterinterface as poi on poi.oldid = oif_id
         WHERE 
-            concat(poi1.id,"-",poi2.id) NOT IN (SELECT concat(port1_id,"-",port2_id) FROM racktables_django.api_portinterfacecompat);
+            concat(pii.id,"-",poi.id) NOT IN (SELECT concat(portinnerinterface_id,"-",portouterinterface_id) FROM racktables_django.api_portinterfacecompat);
     SET inserted = (SELECT count(id) FROM racktables_django.api_portinterfacecompat) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 057_api_port_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.057_api_port_pull;
 
 DELIMITER $$
@@ -1947,28 +2185,32 @@ BEGIN
     INSERT INTO 
         racktables_django.api_port (oldid,name,label,comment,l2address,attachedport_id,innerinterface_id,outerinterface_id,parentobject_id,patch_id) 
         SELECT 
-             p.id
-            ,p.name
-            ,p.label
-            ,p.reservation_comment
-            ,p.l2address
+             old.id
+            ,old.name
+            ,ifnull(old.label,'')
+            ,ifnull(old.reservation_comment,'')
+            ,ifnull(old.l2address,'')
             ,null
             ,ii.id
             ,oi.id
             ,po.id
             ,null
         FROM 
-             racktables.Port as p
-             LEFT JOIN racktables_django.api_portinnerinterface as ii on ii.oldid = p.iif_id
+             racktables.Port as old
+             LEFT JOIN racktables_django.api_portinnerinterface as ii on ii.oldid = old.iif_id
              LEFT JOIN racktables_django.api_portinterfacecompat as oi on ii.id = oi.portinnerinterface_id
-             LEFT JOIN racktables_django.api_object as po on po.oldid = p.object_id
+             LEFT JOIN racktables_django.api_object as po on po.oldid = old.object_id
         WHERE
-            concat(pct.id,"-",poi.id) NOT IN (SELECT concat(cabletype_id,"-",interfacetype_id) FROM racktables_django.api_port);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_port);
     SET inserted = (SELECT count(id) FROM racktables_django.api_port) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 058_api_vlandomain_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.058_api_vlandomain_pull;
 
 DELIMITER $$
@@ -1979,7 +2221,7 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlandomain);
     INSERT INTO 
-        racktables_django.api_vlandomain (oldid,parentdomain,description) 
+        racktables_django.api_vlandomain (oldid,parentdomain_id,description) 
         SELECT 
              id
             ,null
@@ -1994,7 +2236,7 @@ BEGIN
         ,racktables.VLANDomain as OldDomain
         ,racktables_django.api_vlandomain as ParentDomain
     SET
-        BaseDomain.parentdomain = ParentDomain.id
+        BaseDomain.parentdomain_id = ParentDomain.id
     WHERE 
         BaseDomain.oldid = OldDomain.id AND
         ParentDomain.oldid = OldDomain.group_id;
@@ -2004,6 +2246,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 059_api_vlandescription_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.059_api_vlandescription_pull;
 
 DELIMITER $$
@@ -2026,7 +2272,8 @@ BEGIN
             END
             ,description
         FROM 
-             racktables.VLANDomain
+             racktables.VLANDescription old 
+             LEFT JOIN racktables_django.api_vlandomain as domain on old.domain_id = domain.oldid
         WHERE 
             concat(domain.id,"-",vlan_id) NOT IN (SELECT concat(domain_id,"-",vlan_id) FROM racktables_django.api_vlandescription);
 
@@ -2035,6 +2282,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 060_api_vlanipv4_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.060_api_vlanipv4_pull;
 
 DELIMITER $$
@@ -2045,24 +2296,26 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanipv4);
     INSERT INTO 
-        racktables_django.api_vlanipv4 (domain_id,vlan_id,ipv4net_id) 
+        racktables_django.api_vlanipv4 (vlan_id,ipv4net_id) 
         SELECT 
-             domain.id
-            ,vlan.id
+             vlan.id
             ,net.id
         FROM 
              racktables.VLANIPv4 as old
-             LEFT JOIN racktables_django.api_vlandomain as domain on old.id = domain.oldid
-             LEFT JOIN racktables_django.api_vlan as vlan on vlan.id = old.vlan_id AND domain.id = vlan.domain_id
+             LEFT JOIN racktables_django.api_vlandescription as vlan on vlan.vlan = old.vlan_id
              LEFT JOIN racktables_django.api_ipv4network as net on old.ipv4net_id = net.oldid
         WHERE 
-            concat(domain.id,"-",vlan.id,"-",net.id) NOT IN (SELECT concat(domain_id,"-",vlan_id,"-",net_id)  FROM racktables_django.api_vlanipv4);
+            concat(vlan.id,"-",net.id) NOT IN (SELECT concat(vlan_id,"-",ipv4net_id)  FROM racktables_django.api_vlanipv4);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanipv4) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 061_api_vlanipv6_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.061_api_vlanipv6_pull;
 
 DELIMITER $$
@@ -2073,24 +2326,27 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanipv6);
     INSERT INTO 
-        racktables_django.api_vlanipv6 (domain_id,vlan_id,ipv4net_id) 
+        racktables_django.api_vlanipv6 (vlan_id,ipv6net_id) 
         SELECT 
              domain.id
             ,vlan.id
             ,net.id
         FROM 
              racktables.VLANIPv4 as old
-             LEFT JOIN racktables_django.api_vlandomain as domain on old.id = domain.oldid
-             LEFT JOIN racktables_django.api_vlan as vlan on vlan.id = old.vlan_id AND domain.id = vlan.domain_id
+             LEFT JOIN racktables_django.api_vlandescription as vlan on vlan.vlan = old.vlan_id
              LEFT JOIN racktables_django.api_ipv6network as net on old.ipv6net_id = net.oldid
         WHERE 
-            concat(domain.id,"-",vlan.id,"-",net.id) NOT IN (SELECT concat(domain_id,"-",vlan_id,"-",net_id)  FROM racktables_django.api_vlanipv6);
+            concat(vlan.id,"-",net.id) NOT IN (SELECT concat(vlan_id,"-",ipv6net_id)  FROM racktables_django.api_vlanipv6);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanipv6) - inserted;
     RETURN inserted;
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 062_api_portallowedvlan_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.062_api_portallowedvlan_pull;
 
 DELIMITER $$
@@ -2119,6 +2375,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 063_api_portlog_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.063_api_portlog_pull;
 
 DELIMITER $$
@@ -2148,6 +2408,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 064_api_portvlanmode_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.064_api_portvlanmode_pull;
 
 DELIMITER $$
@@ -2165,6 +2429,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 065_api_rackobject_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.065_api_rackobject_pull;
 
 DELIMITER $$
@@ -2200,6 +2468,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 066_api_rackspace_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.066_api_rackspace_pull;
 
 DELIMITER $$
@@ -2234,6 +2506,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 067_api_rackthumbnail_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.067_api_rackthumbnail_pull;
 
 DELIMITER $$
@@ -2259,6 +2535,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 068_api_script_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.067_api_script_pull;
 
 DELIMITER $$
@@ -2283,6 +2563,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 069_api_tag_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.069_api_tag_pull;
 
 DELIMITER $$
@@ -2324,6 +2608,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 070_api_tagfile_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.070_api_tagfile_pull;
 
 DELIMITER $$
@@ -2353,6 +2641,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 071_api_tagipv4network_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.071_api_tagipv4network_pull;
 
 DELIMITER $$
@@ -2382,6 +2674,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 072_api_tagipv4rspool_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.072_api_tagipv4rspool_pull;
 
 DELIMITER $$
@@ -2411,6 +2707,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 073_api_tagipv4vs_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.073_api_tagipv4vs_pull;
 
 DELIMITER $$
@@ -2442,6 +2742,8 @@ $$
 DELIMITER ;
 
 
+ ## 074_api_tagipv6net_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.074_api_tagipv6net_pull;
 
 DELIMITER $$
@@ -2471,6 +2773,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 075_api_taglocation_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.075_api_taglocation_pull;
 
 DELIMITER $$
@@ -2500,6 +2806,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 076_api_tagobject_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.076_api_tagobject_pull;
 
 DELIMITER $$
@@ -2529,6 +2839,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 077_api_tagrack_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.077_api_tagrack_pull;
 
 DELIMITER $$
@@ -2558,6 +2872,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 078_api_vlanstrule_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.078_api_vlanstrule_pull;
 
 DELIMITER $$
@@ -2575,6 +2893,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 079_api_vlanswitchtemplate_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.079_api_vlanswitchtemplate_pull;
 
 DELIMITER $$
@@ -2603,6 +2925,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 080_api_vlanswitch_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.080_api_vlanswitch_pull;
 
 DELIMITER $$
@@ -2638,6 +2964,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 081_api_vlanvalidid_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.081_api_vlanvalidid_pull;
 
 DELIMITER $$
@@ -2662,6 +2992,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 082_api_vs_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.082_api_vs_pull;
 
 DELIMITER $$
@@ -2689,6 +3023,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 083_api_vsenabledips_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.083_api_vsenabledips_pull;
 
 DELIMITER $$
@@ -2720,6 +3058,10 @@ BEGIN
 END;
 $$ 
 DELIMITER ;
+
+
+ ## 084_api_vsenabledports_pull.sql ##
+
 DROP FUNCTION IF EXISTS racktables_django.084_api_vsenabledports_pull;
 
 DELIMITER $$

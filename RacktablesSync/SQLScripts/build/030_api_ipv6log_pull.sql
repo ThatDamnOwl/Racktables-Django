@@ -17,7 +17,7 @@ BEGIN
             ,user.id
         FROM 
              racktables.IPv6Log AS log
-             LEFT JOIN racktables_django.api_ipv4address as ip on ip.oldip = log.ip
+             LEFT JOIN racktables_django.api_ipv6address as ip on ip.oldip = log.ip
              LEFT JOIN racktables_django.api_useraccount as user on user.username = log.user COLLATE utf8_unicode_ci 
         WHERE 
             log.id NOT IN (SELECT oldid FROM racktables_django.api_ipv6log);

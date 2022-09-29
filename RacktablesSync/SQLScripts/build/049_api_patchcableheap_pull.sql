@@ -10,21 +10,21 @@ BEGIN
     INSERT INTO 
         racktables_django.api_patchcableheap (oldid,amount,colour,length,description,cabletype_id,end1_id,end2_id) 
         SELECT 
-             id
-            ,amount
+             old.id
+            ,old.amount
             ,(X'000000')
-            ,length
-            ,description
+            ,old.length
+            ,old.description
             ,pct.id
             ,pcc1.id
             ,pcc2.id
         FROM 
-             racktables.PatchCableHeap
+             racktables.PatchCableHeap as old
              LEFT JOIN racktables_django.api_patchcabletype as pct on pct.oldid = pctype_id
              LEFT JOIN racktables_django.api_patchcableconnector as pcc1 on pcc1.oldid = end1_conn_id
              LEFT JOIN racktables_django.api_patchcableconnector as pcc2 on pcc2.oldid = end2_conn_id
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheap);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheap);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableheap) - inserted;
     RETURN inserted;
 END;

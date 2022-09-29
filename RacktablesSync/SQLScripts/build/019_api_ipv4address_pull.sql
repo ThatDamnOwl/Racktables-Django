@@ -64,7 +64,17 @@ BEGIN
         WHERE  
             ip not in (select oldip from racktables_django.api_ipv4address)
         GROUP BY ip;
-
+    INSERT INTO racktables_django.api_ipv4address (ip,name,comment,reserved,oldip)
+        SELECT 
+               concat('::ffff:',INET6_NTOA(rsip))
+              ,old.comment
+              ,''
+              ,1
+              ,INET_ATON(INET6_NTOA(rsip))
+        FROM
+            racktables.IPv4RS AS old
+        WHERE
+            concat('::ffff:',INET6_NTOA(rsip)) NOT IN (select ip from racktables_django.api_ipv4address);
     SET inserted = (SELECT count(id) FROM racktables_django.api_ipv4address) - inserted;
     RETURN inserted;
 END;

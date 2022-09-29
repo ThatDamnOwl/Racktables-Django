@@ -10,15 +10,15 @@ BEGIN
     INSERT INTO 
         racktables_django.api_filelinkipv4vs (oldid,file_id,parent_id) 
         SELECT 
-               id
+               FL.id
               ,apifile.id
               ,apiobj.id
         FROM 
-             racktables.FileLink
+             racktables.FileLink FL
              LEFT JOIN racktables_django.api_file as apifile on file_id = apifile.oldid
              LEFT JOIN racktables_django.api_ipv4vs as apiobj on entity_id = apiobj.oldid
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv4vs) AND
+            FL.id NOT IN (SELECT oldid FROM racktables_django.api_filelinkipv4vs) AND
             entity_type = 'ipv4vs';
     SET inserted = (SELECT count(id) FROM racktables_django.api_filelinkipv4vs) - inserted;
     RETURN inserted;

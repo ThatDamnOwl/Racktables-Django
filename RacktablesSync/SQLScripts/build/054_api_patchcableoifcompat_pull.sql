@@ -10,12 +10,12 @@ BEGIN
     INSERT INTO 
         racktables_django.api_patchcableoifcompat (cabletype_id,interfacetype_id) 
         SELECT 
-             pct.id
-            ,poi.id
+             pct.id as pct_id
+            ,poi.id as poi_id
         FROM 
-             racktables.PatchCableOIFCompat
-             LEFT JOIN racktables_django.api_portouterinterface as poi on poi.oldid = interfacetype_id
-             LEFT JOIN racktables_django.api_patchcabletype as pct on pct.oldid = cabletype_id
+             racktables.PatchCableOIFCompat as old
+             LEFT JOIN racktables_django.api_portouterinterface as poi on poi.oldid = old.oif_id
+             LEFT JOIN racktables_django.api_patchcabletype as pct on pct.oldid = old.pctype_id
         WHERE 
             concat(pct.id,"-",poi.id) NOT IN (SELECT concat(cabletype_id,"-",interfacetype_id) FROM racktables_django.api_patchcableoifcompat);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableoifcompat) - inserted;

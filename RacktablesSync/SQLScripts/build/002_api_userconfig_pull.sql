@@ -14,10 +14,10 @@ BEGIN
             ,varvalue
             ,UA.id
         FROM racktables.UserConfig as UC
-            LEFT JOIN racktables_django.api_useraccount as UA on UA.username = UC.user
+            LEFT JOIN racktables_django.api_useraccount as UA on UA.username = UC.user COLLATE utf8_unicode_ci
         WHERE 
             concat(varname,"-",UA.id) not in (
-                SELECT concat(varname,"-",user_id)
+                SELECT concat(varname,"-",user_id) COLLATE utf8_unicode_ci
                 FROM racktables_django.api_userconfig
             );
     SET inserted = (SELECT count(id) FROM racktables_django.api_userconfig) - inserted;

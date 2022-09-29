@@ -8,7 +8,7 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_ipv6network);
     INSERT INTO 
-        racktables_django.api_ipv6network (oldid,ip,oldip,mask,last_ip,oldlastip,name,comment) 
+        racktables_django.api_ipv6network (oldid,ip,oldip,mask,lastip,oldlastip,name,comment) 
         SELECT 
               id
              ,INET6_NTOA(ip)
