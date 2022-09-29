@@ -144,7 +144,7 @@ class IPv4RS(models.Model):
 	oldid = models.IntegerField()
 	inservice = models.BooleanField()
 	rsip = models.ForeignKey(IPv4Address, on_delete=models.CASCADE)
-	oldrsip = models.PositiveBigIntegerField()
+	oldrsip = models.BinaryField(16)
 	rsport = models.SmallIntegerField()
 	rspool = models.ForeignKey(IPv4RSPool, on_delete=models.CASCADE)
 	rsconfig = models.TextField()
@@ -224,7 +224,7 @@ class Config(models.Model):
 class File(models.Model):
 	oldid = models.IntegerField()
 	name = models.TextField(255)
-	filetype = models.ForeignKey(Dictionary, on_delete=models.RESTRICT)
+	filetype = models.TextField(255)
 	size = models.IntegerField()
 	created = models.DateTimeField()
 	modified = models.DateTimeField()
@@ -355,7 +355,7 @@ class PortOuterInterface(models.Model):
 
 class PatchCableOIFCompat(models.Model):
 	cabletype = models.ForeignKey(PatchCableType, on_delete=models.CASCADE)
-	interfacetype = models.ForeignKey(PortInnerInterface, on_delete=models.CASCADE)
+	interfacetype = models.ForeignKey(PortOuterInterface, on_delete=models.CASCADE)
 
 class Port(models.Model):
 	oldid = models.IntegerField()
@@ -394,13 +394,12 @@ class PortAllowedVLAN(models.Model):
 	native = models.BooleanField()
 
 class PortCompat(models.Model):
-	port1 = models.ForeignKey(PortInnerInterface, on_delete=models.CASCADE, related_name='compat_port1')
-	port2 = models.ForeignKey(PortInnerInterface, on_delete=models.CASCADE, related_name='compat_port2')
+	port1 = models.ForeignKey(PortOuterInterface, on_delete=models.CASCADE, related_name='compat_port1')
+	port2 = models.ForeignKey(PortOuterInterface, on_delete=models.CASCADE, related_name='compat_port2')
 
 class PortInterfaceCompat(models.Model):
 	portinnerinterface = models.ForeignKey(PortInnerInterface, on_delete=models.CASCADE)
 	portouterinterface = models.ForeignKey(PortOuterInterface, on_delete=models.CASCADE) 
-	
 
 class PortLog(models.Model):
 	oldid = models.IntegerField()

@@ -1,2 +1,2 @@
-cd '~/etc/racktables-django/'
+cd '/etc/racktables-django/'
 source env/bin/activate
