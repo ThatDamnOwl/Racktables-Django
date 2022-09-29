@@ -10,17 +10,17 @@ BEGIN
     INSERT INTO 
         racktables_django.api_ipv4log (oldid,date,message,ip_id,user_id) 
         SELECT 
-             log.id
+             IPv4Log.id
             ,date
             ,message
-            ,ip.id
+            ,ip4.id
             ,user.id
         FROM 
-             racktables.IPv4Log COLLATE utf8_unicode_ci AS log
-             LEFT JOIN racktables_django.api_ipv4address  COLLATE utf8_unicode_ci as ip on ip.oldip = log.ip
-             LEFT JOIN racktables_django.api_useraccount  COLLATE utf8_unicode_ci as user on user.username = log.user 
+             racktables.IPv4Log 
+             LEFT JOIN racktables_django.api_ipv4address as ip4 on ip4.oldip = IPv4Log.ip COLLATE utf8_unicode_ci 
+             LEFT JOIN racktables_django.api_useraccount as user on user.username = IPv4Log.user COLLATE utf8_unicode_ci 
         WHERE 
-            log.id NOT IN (SELECT oldid FROM racktables_django.api_ipv4log);
+            IPv4Log.id NOT IN (SELECT oldid FROM racktables_django.api_ipv4log);
     SET inserted = (SELECT count(id) FROM racktables_django.api_ipv4log) - inserted;
     RETURN inserted;
 END;

@@ -20,8 +20,8 @@ BEGIN
              LEFT JOIN racktables_django.api_tag as tag on tag.oldid = old.tag_id
              LEFT JOIN racktables_django.api_useraccount as user on user.oldid 
         WHERE
-            old.entity_realm = 'ipv4net'
-            concat(obj.id,'-',tag.id,'-',user.id) NOT IN (SELECT concat(ipv4net_id,'-',tag_id,'-',user_id) FROM racktables_django.api_tagipv4network)
+            old.entity_realm = 'ipv4net' AND
+            concat(obj.id,'-',tag.id,'-',user.id) NOT IN (SELECT concat(ipv4net_id,'-',tag_id,'-',user_id) FROM racktables_django.api_tagipv4network);
     SET inserted = (SELECT count(id) FROM racktables_django.api_tagipv4network) - inserted;
     RETURN inserted;
 END;

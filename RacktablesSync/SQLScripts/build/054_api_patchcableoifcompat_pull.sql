@@ -17,7 +17,7 @@ BEGIN
              LEFT JOIN racktables_django.api_portouterinterface as poi on poi.oldid = interfacetype_id
              LEFT JOIN racktables_django.api_patchcabletype as pct on pct.oldid = cabletype_id
         WHERE 
-            concat(pct.id,"-",poi.id) NOT IN (SELECT concat(cabletype_id,"-",interfacetype_id) FROM racktables_django.api_patchcableoifcompat)
+            concat(pct.id,"-",poi.id) NOT IN (SELECT concat(cabletype_id,"-",interfacetype_id) FROM racktables_django.api_patchcableoifcompat);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableoifcompat) - inserted;
     RETURN inserted;
 END;

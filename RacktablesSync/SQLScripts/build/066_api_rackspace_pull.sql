@@ -10,7 +10,15 @@ BEGIN
     INSERT INTO 
         racktables_django.api_rackspace (unit_no,state,atom_id,parentobject_id,rack_id) 
         SELECT 
-             
+             old.unit_no
+            ,CASE
+                WHEN state = 'A' THEN 0
+                WHEN state = 'U' THEN 1
+                ELSE 1
+            END
+            ,atom.id
+            ,object.id
+            ,rack.id
         FROM 
              racktables.RackSpace as old
              LEFT JOIN racktables_django.api_rack as rack on rack.oldid = old.rack_id

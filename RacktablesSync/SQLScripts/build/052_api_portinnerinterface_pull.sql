@@ -15,7 +15,7 @@ BEGIN
         FROM 
              racktables.PortInnerInterface
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_portinnerinterface)
+            id NOT IN (SELECT oldid FROM racktables_django.api_portinnerinterface);
     SET inserted = (SELECT count(id) FROM racktables_django.api_portinnerinterface) - inserted;
     RETURN inserted;
 END;

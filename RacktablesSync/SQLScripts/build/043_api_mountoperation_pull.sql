@@ -24,7 +24,7 @@ BEGIN
              LEFT JOIN racktables_django.api_molecule as napimol on napimol.oldid = MO.new_molecule_id
              LEFT JOIN racktables_django.api_useraccount as user on user.username = MO.user_name 
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_mountoperation)
+            id NOT IN (SELECT oldid FROM racktables_django.api_mountoperation);
     SET inserted = (SELECT count(id) FROM racktables_django.api_mountoperation) - inserted;
     RETURN inserted;
 END;

@@ -17,7 +17,7 @@ BEGIN
              LEFT JOIN racktables_django.api_portouterinterface as pii on pii.oldid = iif_id
              LEFT JOIN racktables_django.api_portinnerinterface as poi on poi.oldid = oif_id
         WHERE 
-            concat(poi1.id,"-",poi2.id) NOT IN (SELECT concat(port1_id,"-",port2_id) FROM racktables_django.api_portinterfacecompat)
+            concat(poi1.id,"-",poi2.id) NOT IN (SELECT concat(port1_id,"-",port2_id) FROM racktables_django.api_portinterfacecompat);
     SET inserted = (SELECT count(id) FROM racktables_django.api_portinterfacecompat) - inserted;
     RETURN inserted;
 END;

@@ -10,13 +10,12 @@ BEGIN
     INSERT INTO
     racktables_django.api_row (oldid, name, location_id)
     SELECT
-         row.id
-        ,row.name
+         Row.id
+        ,Row.name
         ,location.id
-    FROM racktables.Row AS row 
-         LEFT JOIN
-            racktables_django.api_location AS location ON location_id = oldid
-    WHERE row.id NOT IN (
+    FROM racktables.Row
+         LEFT JOIN racktables_django.api_location AS location ON location_id = location.oldid
+    WHERE Row.id NOT IN (
         SELECT oldid
         FROM racktables_django.api_row
     );

@@ -8,7 +8,7 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcabletype);
     INSERT INTO 
-        racktables_django.api_patchcabletype (oldid,default,cabletype) 
+        racktables_django.api_patchcabletype (oldid,defaultvalue,cabletype) 
         SELECT 
              id
             ,CASE
@@ -19,7 +19,7 @@ BEGIN
         FROM 
              racktables.PatchCableType
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_patchcabletype)
+            id NOT IN (SELECT oldid FROM racktables_django.api_patchcabletype);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcabletype) - inserted;
     RETURN inserted;
 END;

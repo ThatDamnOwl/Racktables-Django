@@ -20,8 +20,8 @@ BEGIN
              LEFT JOIN racktables_django.api_tag as tag on tag.oldid = old.tag_id
              LEFT JOIN racktables_django.api_useraccount as user on user.oldid 
         WHERE
-            old.entity_realm = 'rack'
-            concat(obj.id,'-',tag.id,'-',user.id) NOT IN (SELECT concat(rack_id,'-',tag_id,'-',user_id) FROM racktables_django.api_tagrack)
+            old.entity_realm = 'rack' AND
+            concat(obj.id,'-',tag.id,'-',user.id) NOT IN (SELECT concat(rack_id,'-',tag_id,'-',user_id) FROM racktables_django.api_tagrack);
     SET inserted = (SELECT count(id) FROM racktables_django.api_tagrack) - inserted;
     RETURN inserted;
 END;

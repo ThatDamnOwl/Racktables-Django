@@ -13,7 +13,7 @@ BEGIN
              old.id
             ,CASE
                 WHEN old.assignable = 'yes' THEN 1
-                ELSE THEN 0
+                ELSE 0
             END
             ,old.name
             ,old.color

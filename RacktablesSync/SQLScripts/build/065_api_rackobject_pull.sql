@@ -16,7 +16,7 @@ BEGIN
             ,old.assetno
             ,CASE 
                 WHEN old.has_problems = 'yes' THEN 1
-                ELSE THEN 0
+                ELSE 0
              END
             ,old.comment
             ,objecttype.id

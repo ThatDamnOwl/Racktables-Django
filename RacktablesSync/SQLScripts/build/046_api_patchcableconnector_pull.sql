@@ -8,18 +8,18 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableconnector);
     INSERT INTO 
-        racktables_django.api_patchcableconnector (oldid,default,connectorname) 
-        SELECT 
-             id
+        racktables_django.api_patchcableconnector (oldid,defaultvalue,connectorname) 
+        SELECT
+             PatchCableConnector.id
             ,CASE
-                WHEN origin = 'default' THEN 1
+                WHEN PatchCableConnector.origin = 'default' THEN 1
                 ELSE 0
               END
             ,connector
         FROM 
              racktables.PatchCableConnector
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_patchcableconnector)
+            id NOT IN (SELECT oldid FROM racktables_django.api_patchcableconnector);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableconnector) - inserted;
     RETURN inserted;
 END;

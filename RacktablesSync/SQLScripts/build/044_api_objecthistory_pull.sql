@@ -8,25 +8,27 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_objecthistory);
     INSERT INTO 
-        racktables_django.api_objecthistory (oldid,changedtime,hasproblems,comment,change,oldvalue,changedobject_id,user_id) 
+        racktables_django.api_objecthistory (oldeventid, oldid, name, label, changedobject_id, assetno, changedtime, user_id, hasproblems, comment) 
         SELECT 
-               OH.event_id
+               ObjectHistory.event_id
+              ,ObjectHistory.id
+              ,ObjectHistory.name
+              ,ObjectHistory.label
+              ,CO.id
+              ,ObjectHistory.asset_no
               ,ctime
+              ,US.id
               ,CASE
                 WHEN has_problems = 'yes' THEN 1
                 ELSE 0
               END
-              ,comment
-              ,change
-              ,oldvalue
-              ,CO.id
-              ,US.id
+              ,ObjectHistory.comment
         FROM 
-             racktables.ObjectHistory as OH
-             LEFT JOIN racktables_django.api_object as apiobj on apiobj.oldid = OH.id
-             LEFT JOIN racktables_django.api_useraccount as user on user.username = OH.user_name 
+             racktables.ObjectHistory
+             LEFT JOIN racktables_django.api_object as apiobj on apiobj.oldid = ObjectHistory.id
+             LEFT JOIN racktables_django.api_useraccount as user on user.username = ObjectHistory.user_name 
         WHERE 
-            OH.event_id NOT IN (SELECT oldid FROM racktables_django.api_objecthistory)
+            ObjectHistory.event_id NOT IN (SELECT oldid FROM racktables_django.api_objecthistory);
     SET inserted = (SELECT count(id) FROM racktables_django.api_objecthistory) - inserted;
     RETURN inserted;
 END;

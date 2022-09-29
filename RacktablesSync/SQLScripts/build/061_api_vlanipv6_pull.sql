@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS racktables_django.060_api_vlanipv6_pull;
+DROP FUNCTION IF EXISTS racktables_django.061_api_vlanipv6_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.060_api_vlanipv6_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.061_api_vlanipv6_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN

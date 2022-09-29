@@ -1,6 +1,3 @@
-DROP DATABASE racktables_django;
-CREATE DATABASE racktables_django;
-GRANT ALL on racktables_django.* to django@localhost;
 USE racktables_django;
 
 DROP FUNCTION IF EXISTS racktables_django.parse_ipbin;

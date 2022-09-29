@@ -18,7 +18,7 @@ BEGIN
         FROM 
              racktables.Plugin
         WHERE 
-            name NOT IN (SELECT name FROM racktables_django.api_plugin)
+            name NOT IN (SELECT name FROM racktables_django.api_plugin);
     SET inserted = (SELECT count(id) FROM racktables_django.api_plugin) - inserted;
     RETURN inserted;
 END;

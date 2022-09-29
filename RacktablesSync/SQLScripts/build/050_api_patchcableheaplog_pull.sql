@@ -20,7 +20,7 @@ BEGIN
              LEFT JOIN racktables_django.api_patchcableheap as pch on heap_id = pch.oldid
              LEFT JOIN racktables_django.api_useraccount as ua on user_id = ua.id
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheaplog)
+            id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheaplog);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableheaplog) - inserted;
     RETURN inserted;
 END;

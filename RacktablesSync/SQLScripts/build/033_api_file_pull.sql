@@ -8,12 +8,12 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_file);
     INSERT INTO 
-        racktables_django.api_file (oldid,name,size,create,modify,access,thumbnail,content,comment) 
+        racktables_django.api_file (oldid, name, created, size, modified, accessed, thumbnail, content, comment)
         SELECT 
                id
               ,name
-              ,size
               ,ctime
+              ,size
               ,mtime
               ,atime
               ,thumbnail

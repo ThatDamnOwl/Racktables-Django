@@ -20,7 +20,7 @@ BEGIN
              LEFT JOIN racktables_django.api_object as apiobj on apiobj.oldid = OL.object_id
              LEFT JOIN racktables_django.api_useraccount as user on user.username = OL.user_name 
         WHERE 
-            OL.id NOT IN (SELECT oldid FROM racktables_django.api_objectlog)
+            OL.id NOT IN (SELECT oldid FROM racktables_django.api_objectlog);
     SET inserted = (SELECT count(id) FROM racktables_django.api_objectlog) - inserted;
     RETURN inserted;
 END;

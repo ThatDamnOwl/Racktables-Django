@@ -24,7 +24,7 @@ BEGIN
              LEFT JOIN racktables_django.api_patchcableconnector as pcc1 on pcc1.oldid = end1_conn_id
              LEFT JOIN racktables_django.api_patchcableconnector as pcc2 on pcc2.oldid = end2_conn_id
         WHERE 
-            id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheap)
+            id NOT IN (SELECT oldid FROM racktables_django.api_patchcableheap);
     SET inserted = (SELECT count(id) FROM racktables_django.api_patchcableheap) - inserted;
     RETURN inserted;
 END;

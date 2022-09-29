@@ -17,9 +17,9 @@ BEGIN
             ,usr.id
         FROM 
              racktables.VLANSwitchTemplate as old
-             LEFT JOIN racktables_django.api_useraccount as usr on old.saved_by = usr.
+             LEFT JOIN racktables_django.api_useraccount as usr on old.saved_by = usr.username COLLATE utf8_unicode_ci
         WHERE 
-            old.id NOT IN (SELECT oldid FROM racktables_django.api_rackobject);
+            old.id NOT IN (SELECT oldid FROM racktables_django.VLANSwitchTemplate);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanswitchtemplate) - inserted;
     RETURN inserted;
