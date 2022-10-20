@@ -2552,10 +2552,10 @@ DELIMITER ;
 
  ## 068_api_script_pull.sql ##
 
-DROP FUNCTION IF EXISTS racktables_django.067_api_script_pull;
+DROP FUNCTION IF EXISTS racktables_django.068_api_script_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.067_api_script_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.068_api_script_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN
@@ -2569,7 +2569,7 @@ BEGIN
         FROM 
              racktables.Script as old
         WHERE 
-            script_name NOT IN (SELECT name FROM racktables_django.api_script);
+            script_name NOT IN (SELECT name COLLATE utf8_general_ci FROM racktables_django.api_script);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_script) - inserted;
     RETURN inserted;
@@ -2594,17 +2594,17 @@ BEGIN
         SELECT 
              old.id
             ,CASE
-                WHEN old.assignable = 'yes' THEN 1
+                WHEN old.is_assignable = 'yes' THEN 1
                 ELSE 0
             END
-            ,old.name
-            ,old.color
-            ,old.description
+            ,old.tag
+            ,ifnull(old.color,x'000000')
+            ,ifnull(old.description,'')
             ,null
         FROM 
-             racktables.TagTree
+             racktables.TagTree as old
         WHERE 
-            script_name NOT IN (SELECT name FROM racktables_django.api_tag);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_tag);
 
     UPDATE
         racktables_django.api_tag AS tag
@@ -2755,19 +2755,19 @@ $$
 DELIMITER ;
 
 
- ## 074_api_tagipv6net_pull.sql ##
+ ## 074_api_tagipv6network_pull.sql ##
 
-DROP FUNCTION IF EXISTS racktables_django.074_api_tagipv6net_pull;
+DROP FUNCTION IF EXISTS racktables_django.074_api_tagipv6network_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.074_api_tagipv6net_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.074_api_tagipv6network_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN
     DECLARE inserted INT;
-    SET inserted = (SELECT count(id) FROM racktables_django.api_tagipv6net);
+    SET inserted = (SELECT count(id) FROM racktables_django.api_tagipv6network);
     INSERT INTO 
-        racktables_django.api_tagipv6net (date,ipv4vs_id,tag_id,user_id) 
+        racktables_django.api_tagipv6network (date,ipv6network_id,tag_id,user_id) 
         SELECT 
              old.date
             ,obj.id
@@ -2780,8 +2780,8 @@ BEGIN
              LEFT JOIN racktables_django.api_useraccount as user on user.oldid 
         WHERE
             old.entity_realm = 'ipv6net' AND
-            concat(obj.id,'-',tag.id,'-',user.id) NOT IN (SELECT concat(ipv4vs_id,'-',tag_id,'-',user_id) FROM racktables_django.api_tagipv6net);
-    SET inserted = (SELECT count(id) FROM racktables_django.api_tagipv6net) - inserted;
+            concat(obj.id,'-',tag.id,'-',user.id) NOT IN (SELECT concat(ipv6network_id,'-',tag_id,'-',user_id) FROM racktables_django.api_tagipv6network);
+    SET inserted = (SELECT count(id) FROM racktables_django.api_tagipv6network) - inserted;
     RETURN inserted;
 END;
 $$ 
@@ -2835,13 +2835,13 @@ BEGIN
     INSERT INTO 
         racktables_django.api_tagobject (date,object_id,tag_id,user_id) 
         SELECT 
-             old.date
-            ,obj.id
-            ,tag.id
-            ,user.id
+             old.date as date_time
+            ,obj.id as object_id
+            ,tag.id as tag_id
+            ,user.id as user_id
         FROM 
              racktables.TagStorage as old
-             LEFT JOIN racktables_django.api_location as obj on obj.oldid = old.entity_id
+             LEFT JOIN racktables_django.api_object as obj on obj.oldid = old.entity_id
              LEFT JOIN racktables_django.api_tag as tag on tag.oldid = old.tag_id
              LEFT JOIN racktables_django.api_useraccount as user on user.oldid 
         WHERE
@@ -2921,7 +2921,7 @@ BEGIN
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanswitchtemplate);
 
     INSERT INTO 
-        racktables_django.api_rackobject (oldid,revision,description,modifiedby_id) 
+        racktables_django.api_vlanswitchtemplate (oldid,revision,description,modifiedby_id) 
         SELECT 
              old.id
             ,old.mutex_rev
@@ -2931,7 +2931,7 @@ BEGIN
              racktables.VLANSwitchTemplate as old
              LEFT JOIN racktables_django.api_useraccount as usr on old.saved_by = usr.username COLLATE utf8_unicode_ci
         WHERE 
-            old.id NOT IN (SELECT oldid FROM racktables_django.VLANSwitchTemplate);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_vlanswitchtemplate);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanswitchtemplate) - inserted;
     RETURN inserted;
@@ -2955,12 +2955,24 @@ BEGIN
     INSERT INTO 
         racktables_django.api_vlanswitch (revision,lasterror,lasterroroccured,changed,pushstarted,pushended,domain_id,parentobject_id,template_id) 
         SELECT 
-             old.revision
+             old.mutex_rev
             ,old.last_errno
-            ,old.last_error_ts
-            ,old.last_change
-            ,old.last_push_started
-            ,old.last_push_ended
+            ,CASE 
+                WHEN old.last_error_ts = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                ELSE old.last_error_ts
+             END as last_error_time
+            ,CASE 
+                WHEN old.last_change = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                ELSE old.last_change
+             END as last_change_time
+            ,CASE 
+                WHEN old.last_push_started = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                ELSE old.last_push_started
+             END as last_push_started_time
+            ,CASE 
+                WHEN old.last_push_finished = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                ELSE old.last_push_finished
+             END as last_push_finished_time
             ,domain.id
             ,object.id
             ,template.id
@@ -3029,7 +3041,7 @@ BEGIN
         FROM 
              racktables.VS as old
         WHERE 
-            old.id NOT IN (SELECT vlanid FROM racktables_django.api_vs);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_vs);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_vs) - inserted;
     RETURN inserted;
@@ -3060,7 +3072,7 @@ BEGIN
         FROM 
              racktables.VSEnabledIPs as old
              LEFT JOIN racktables_django.api_object as obj on obj.oldid = old.object_id
-             LEFT JOIN racktables_django.api_vs as vs on vs.oldid = old.parentvs_id
+             LEFT JOIN racktables_django.api_vs as vs on vs.oldid = old.vs_id
              LEFT JOIN racktables_django.api_ipv4rspool as rs on rs.oldid = old.rspool_id
              LEFT JOIN racktables_django.api_ipv4address as ip4 on BIN(ip4.oldip) = old.vip
         WHERE 
@@ -3083,10 +3095,10 @@ RETURNS INT
 NOT DETERMINISTIC
 BEGIN
     DECLARE inserted INT;
-    SET inserted = (SELECT count(id) FROM racktables_django.api_vsenabledips);
+    SET inserted = (SELECT count(id) FROM racktables_django.api_vsenabledports);
 
     INSERT INTO 
-        racktables_django.api_vsenabledips (protocol,parentobject_id,parentvs_id,port_id,rspool_id)
+        racktables_django.api_vsenabledports (protocol,parentobject_id,parentvs_id,port_id,rspool_id)
         SELECT 
              CASE
                 WHEN old.proto = 'TCP' THEN 1
@@ -3100,13 +3112,13 @@ BEGIN
         FROM 
              racktables.VSEnabledPorts as old
              LEFT JOIN racktables_django.api_object as obj on obj.oldid = old.object_id
-             LEFT JOIN racktables_django.api_vs as vs on vs.oldid = old.parentvs_id
+             LEFT JOIN racktables_django.api_vs as vs on vs.oldid = old.vs_id
              LEFT JOIN racktables_django.api_ipv4rspool as rs on rs.oldid = old.rspool_id
              LEFT JOIN racktables_django.api_port as port on port.oldid = old.vport
         WHERE 
-            old.id NOT IN (SELECT vlanid FROM racktables_django.api_vsenabledips);
+            concat(obj.id,'-',vs.id,'-',port.id,'-',rs.id) NOT IN (SELECT concat(parentobject_id,'-',parentvs_id,'-',port_id,'-',rspool_id) FROM racktables_django.api_vsenabledports);
 
-    SET inserted = (SELECT count(id) FROM racktables_django.api_vsenabledips) - inserted;
+    SET inserted = (SELECT count(id) FROM racktables_django.api_vsenabledports) - inserted;
     RETURN inserted;
 END;
 $$ 
