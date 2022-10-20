@@ -11,12 +11,24 @@ BEGIN
     INSERT INTO 
         racktables_django.api_vlanswitch (revision,lasterror,lasterroroccured,changed,pushstarted,pushended,domain_id,parentobject_id,template_id) 
         SELECT 
-             old.revision
+             old.mutex_rev
             ,old.last_errno
-            ,old.last_error_ts
-            ,old.last_change
-            ,old.last_push_started
-            ,old.last_push_ended
+            ,CASE 
+                WHEN old.last_error_ts = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                ELSE old.last_error_ts
+             END as last_error_time
+            ,CASE 
+                WHEN old.last_change = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                ELSE old.last_change
+             END as last_change_time
+            ,CASE 
+                WHEN old.last_push_started = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                ELSE old.last_push_started
+             END as last_push_started_time
+            ,CASE 
+                WHEN old.last_push_finished = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                ELSE old.last_push_finished
+             END as last_push_finished_time
             ,domain.id
             ,object.id
             ,template.id

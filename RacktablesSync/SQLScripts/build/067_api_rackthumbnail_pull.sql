@@ -10,10 +10,10 @@ BEGIN
     INSERT INTO 
         racktables_django.api_rackthumbnail (data,rack_id) 
         SELECT 
-             old.data
+             old.thumb_data
             ,rack.id
         FROM 
-             racktables.RackSpace as old
+             racktables.RackThumbnail as old
              LEFT JOIN racktables_django.api_rack as rack on rack.oldid = old.rack_id
         WHERE 
             rack.id NOT IN (SELECT rack_id FROM racktables_django.api_rackthumbnail);

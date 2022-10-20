@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS racktables_django.067_api_script_pull;
+DROP FUNCTION IF EXISTS racktables_django.068_api_script_pull;
 
 DELIMITER $$
-CREATE FUNCTION racktables_django.067_api_script_pull (ignored BIGINT)
+CREATE FUNCTION racktables_django.068_api_script_pull (ignored BIGINT)
 RETURNS INT
 NOT DETERMINISTIC
 BEGIN
@@ -15,7 +15,7 @@ BEGIN
         FROM 
              racktables.Script as old
         WHERE 
-            script_name NOT IN (SELECT name FROM racktables_django.api_script);
+            script_name NOT IN (SELECT name COLLATE utf8_general_ci FROM racktables_django.api_script);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_script) - inserted;
     RETURN inserted;

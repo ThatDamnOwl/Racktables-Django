@@ -2326,17 +2326,16 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanipv6);
     INSERT INTO 
-        racktables_django.api_vlanipv6 (vlan_id,ipv6net_id) 
+        racktables_django.api_vlanipv6 (vlan_id,ipv6network_id) 
         SELECT 
-             domain.id
-            ,vlan.id
+             vlan.id
             ,net.id
         FROM 
-             racktables.VLANIPv4 as old
+             racktables.VLANIPv6 as old
              LEFT JOIN racktables_django.api_vlandescription as vlan on vlan.vlan = old.vlan_id
              LEFT JOIN racktables_django.api_ipv6network as net on old.ipv6net_id = net.oldid
         WHERE 
-            concat(vlan.id,"-",net.id) NOT IN (SELECT concat(vlan_id,"-",ipv6net_id)  FROM racktables_django.api_vlanipv6);
+            concat(vlan.id,"-",net.id) NOT IN (SELECT concat(vlan_id,"-",ipv6network_id)  FROM racktables_django.api_vlanipv6);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanipv6) - inserted;
     RETURN inserted;
@@ -2363,12 +2362,12 @@ BEGIN
             ,vlan.id
             ,port.id
         FROM 
-             racktables.PortAllowedVlan as old
-             LEFT JOIN racktables_django.api_vlan as vlan on vlan.id = old.vlan_id
-             LEFT JOIN racktables_django.api_object as obj on obj.oldif = old.object_id
-             LEFT JOIN racktables_django.api_port as port on port.parentobject_id = obj.id AND port.name = old.port_name
+             racktables.PortAllowedVLAN as old
+             LEFT JOIN racktables_django.api_vlandescription as vlan on vlan.id = old.vlan_id
+             LEFT JOIN racktables_django.api_object as obj on obj.oldid = old.object_id
+             LEFT JOIN racktables_django.api_port as port on port.parentobject_id = obj.id AND port.name = old.port_name COLLATE utf8_general_ci
         WHERE 
-            concat(domain.id,"-",vlan.id,"-",net.id) NOT IN (SELECT concat(domain_id,"-",vlan_id,"-",net_id)  FROM racktables_django.api_portallowedvlan);
+            concat(port.id,"-",vlan.id) NOT IN (SELECT concat(port_id,"-",vlan_id) FROM racktables_django.api_portallowedvlan);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_portallowedvlan) - inserted;
     RETURN inserted;
@@ -2393,12 +2392,12 @@ BEGIN
         SELECT 
              old.id
             ,old.date
-            ,old.comment
+            ,old.message
             ,port.id
             ,user.id
         FROM 
-             racktables.PortAllowedVlan as old
-             LEFT JOIN racktables_django.api_useraccount as user on user.oldid = old.user_id
+             racktables.PortLog as old
+             LEFT JOIN racktables_django.api_useraccount as user on user.username = old.user COLLATE utf8_unicode_ci
              LEFT JOIN racktables_django.api_port as port on port.oldid = old.port_id
         WHERE 
             old.id NOT IN (SELECT oldid FROM racktables_django.api_portlog);
@@ -2422,7 +2421,20 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_portvlanmode);
 
--- skipped because it's impossible to map stuff with the way that the info is stored in the old version of racktables
+    INSERT INTO 
+        racktables_django.api_portvlanmode (trunk,port_id) 
+        SELECT 
+             CASE
+                WHEN old.vlan_mode = 'trunk' THEN 1
+                ELSE 0
+              END as trunk
+            ,port.id
+        FROM 
+             racktables.PortVLANMode as old
+             LEFT JOIN racktables_django.api_object as object on old.object_id = object.oldid
+             LEFT JOIN racktables_django.api_object as port on port.name = old.port_name COLLATE utf8_general_ci
+        WHERE 
+            port.id NOT IN (SELECT port_id FROM racktables_django.api_portvlanmode);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_portvlanmode) - inserted;
     RETURN inserted;
@@ -2447,8 +2459,8 @@ BEGIN
         SELECT 
              old.id
             ,old.name
-            ,old.label
-            ,old.assetno
+            ,ifnull(old.label,"")
+            ,ifnull(old.asset_no,"")
             ,CASE 
                 WHEN old.has_problems = 'yes' THEN 1
                 ELSE 0
@@ -2459,7 +2471,7 @@ BEGIN
         FROM 
              racktables.RackObject as old
              LEFT JOIN racktables_django.api_objecttype as objecttype on objecttype.oldid = old.objtype_id
-             LEFT JOIN racktables_django.api_object as linkedobject on linkedobject.name = old.assetno
+             LEFT JOIN racktables_django.api_object as linkedobject on linkedobject.name = old.asset_no COLLATE utf8_general_ci
         WHERE 
             old.id NOT IN (SELECT oldid FROM racktables_django.api_rackobject);
 
@@ -2482,24 +2494,25 @@ BEGIN
     DECLARE inserted INT;
     SET inserted = (SELECT count(id) FROM racktables_django.api_rackspace);
     INSERT INTO 
-        racktables_django.api_rackspace (unit_no,state,atom_id,parentobject_id,rack_id) 
+        racktables_django.api_rackspace (unitno,state,atom_id,parentobject_id,rack_id) 
         SELECT 
              old.unit_no
             ,CASE
                 WHEN state = 'A' THEN 0
                 WHEN state = 'U' THEN 1
                 ELSE 1
-            END
-            ,atom.id
-            ,object.id
-            ,rack.id
+            END as state
+            ,atom.id as atom_id
+            ,object.id as object_id
+            ,rack.id as rack_id
         FROM 
              racktables.RackSpace as old
              LEFT JOIN racktables_django.api_rack as rack on rack.oldid = old.rack_id
-             LEFT JOIN racktables_django.api_atom as atom on rack.id = atom.rack_id and old.unitno = atom.unit_no
+             LEFT JOIN racktables_django.api_atom as atom on rack.id = atom.rack_id and old.unit_no = atom.unit_no
              LEFT JOIN racktables_django.api_object as object on object.oldid = old.object_id
         WHERE 
-            concat(rack.id,'-',atom.unit_no) NOT IN (SELECT concat(rack_id,'-',unit_no) FROM racktables_django.api_rackspace);
+            concat(rack.id,'-',atom.unit_no) NOT IN (SELECT concat(rack_id,'-',unitno) FROM racktables_django.api_rackspace)
+            AND ifnull(atom.id,'null') != 'null';
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_rackspace) - inserted;
     RETURN inserted;
@@ -2522,10 +2535,10 @@ BEGIN
     INSERT INTO 
         racktables_django.api_rackthumbnail (data,rack_id) 
         SELECT 
-             old.data
+             old.thumb_data
             ,rack.id
         FROM 
-             racktables.RackSpace as old
+             racktables.RackThumbnail as old
              LEFT JOIN racktables_django.api_rack as rack on rack.oldid = old.rack_id
         WHERE 
             rack.id NOT IN (SELECT rack_id FROM racktables_django.api_rackthumbnail);

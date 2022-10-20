@@ -18,7 +18,7 @@ BEGIN
         FROM 
              racktables.VS as old
         WHERE 
-            old.id NOT IN (SELECT vlanid FROM racktables_django.api_vs);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_vs);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_vs) - inserted;
     RETURN inserted;

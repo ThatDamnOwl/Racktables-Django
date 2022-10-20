@@ -71,7 +71,7 @@ select racktables_django.070_api_tagfile_pull(1);
 select racktables_django.071_api_tagipv4network_pull(1);
 select racktables_django.072_api_tagipv4rspool_pull(1);
 select racktables_django.073_api_tagipv4vs_pull(1);
-select racktables_django.074_api_tagipv6net_pull(1);
+select racktables_django.074_api_tagipv6network_pull(1);
 select racktables_django.075_api_taglocation_pull(1);
 select racktables_django.076_api_tagobject_pull(1);
 select racktables_django.077_api_tagrack_pull(1);

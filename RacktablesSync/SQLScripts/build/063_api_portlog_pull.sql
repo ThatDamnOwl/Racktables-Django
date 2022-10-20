@@ -12,12 +12,12 @@ BEGIN
         SELECT 
              old.id
             ,old.date
-            ,old.comment
+            ,old.message
             ,port.id
             ,user.id
         FROM 
-             racktables.PortAllowedVlan as old
-             LEFT JOIN racktables_django.api_useraccount as user on user.oldid = old.user_id
+             racktables.PortLog as old
+             LEFT JOIN racktables_django.api_useraccount as user on user.username = old.user COLLATE utf8_unicode_ci
              LEFT JOIN racktables_django.api_port as port on port.oldid = old.port_id
         WHERE 
             old.id NOT IN (SELECT oldid FROM racktables_django.api_portlog);

@@ -6,10 +6,10 @@ RETURNS INT
 NOT DETERMINISTIC
 BEGIN
     DECLARE inserted INT;
-    SET inserted = (SELECT count(id) FROM racktables_django.api_vsenabledips);
+    SET inserted = (SELECT count(id) FROM racktables_django.api_vsenabledports);
 
     INSERT INTO 
-        racktables_django.api_vsenabledips (protocol,parentobject_id,parentvs_id,port_id,rspool_id)
+        racktables_django.api_vsenabledports (protocol,parentobject_id,parentvs_id,port_id,rspool_id)
         SELECT 
              CASE
                 WHEN old.proto = 'TCP' THEN 1
@@ -23,13 +23,13 @@ BEGIN
         FROM 
              racktables.VSEnabledPorts as old
              LEFT JOIN racktables_django.api_object as obj on obj.oldid = old.object_id
-             LEFT JOIN racktables_django.api_vs as vs on vs.oldid = old.parentvs_id
+             LEFT JOIN racktables_django.api_vs as vs on vs.oldid = old.vs_id
              LEFT JOIN racktables_django.api_ipv4rspool as rs on rs.oldid = old.rspool_id
              LEFT JOIN racktables_django.api_port as port on port.oldid = old.vport
         WHERE 
-            old.id NOT IN (SELECT vlanid FROM racktables_django.api_vsenabledips);
+            concat(obj.id,'-',vs.id,'-',port.id,'-',rs.id) NOT IN (SELECT concat(parentobject_id,'-',parentvs_id,'-',port_id,'-',rspool_id) FROM racktables_django.api_vsenabledports);
 
-    SET inserted = (SELECT count(id) FROM racktables_django.api_vsenabledips) - inserted;
+    SET inserted = (SELECT count(id) FROM racktables_django.api_vsenabledports) - inserted;
     RETURN inserted;
 END;
 $$ 

@@ -14,12 +14,12 @@ BEGIN
             ,vlan.id
             ,port.id
         FROM 
-             racktables.PortAllowedVlan as old
-             LEFT JOIN racktables_django.api_vlan as vlan on vlan.id = old.vlan_id
-             LEFT JOIN racktables_django.api_object as obj on obj.oldif = old.object_id
-             LEFT JOIN racktables_django.api_port as port on port.parentobject_id = obj.id AND port.name = old.port_name
+             racktables.PortAllowedVLAN as old
+             LEFT JOIN racktables_django.api_vlandescription as vlan on vlan.id = old.vlan_id
+             LEFT JOIN racktables_django.api_object as obj on obj.oldid = old.object_id
+             LEFT JOIN racktables_django.api_port as port on port.parentobject_id = obj.id AND port.name = old.port_name COLLATE utf8_general_ci
         WHERE 
-            concat(domain.id,"-",vlan.id,"-",net.id) NOT IN (SELECT concat(domain_id,"-",vlan_id,"-",net_id)  FROM racktables_django.api_portallowedvlan);
+            concat(port.id,"-",vlan.id) NOT IN (SELECT concat(port_id,"-",vlan_id) FROM racktables_django.api_portallowedvlan);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_portallowedvlan) - inserted;
     RETURN inserted;

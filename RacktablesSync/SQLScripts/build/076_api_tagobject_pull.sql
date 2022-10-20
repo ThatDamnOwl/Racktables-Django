@@ -10,13 +10,13 @@ BEGIN
     INSERT INTO 
         racktables_django.api_tagobject (date,object_id,tag_id,user_id) 
         SELECT 
-             old.date
-            ,obj.id
-            ,tag.id
-            ,user.id
+             old.date as date_time
+            ,obj.id as object_id
+            ,tag.id as tag_id
+            ,user.id as user_id
         FROM 
              racktables.TagStorage as old
-             LEFT JOIN racktables_django.api_location as obj on obj.oldid = old.entity_id
+             LEFT JOIN racktables_django.api_object as obj on obj.oldid = old.entity_id
              LEFT JOIN racktables_django.api_tag as tag on tag.oldid = old.tag_id
              LEFT JOIN racktables_django.api_useraccount as user on user.oldid 
         WHERE

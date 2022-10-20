@@ -12,17 +12,17 @@ BEGIN
         SELECT 
              old.id
             ,CASE
-                WHEN old.assignable = 'yes' THEN 1
+                WHEN old.is_assignable = 'yes' THEN 1
                 ELSE 0
             END
-            ,old.name
-            ,old.color
-            ,old.description
+            ,old.tag
+            ,ifnull(old.color,x'000000')
+            ,ifnull(old.description,'')
             ,null
         FROM 
-             racktables.TagTree
+             racktables.TagTree as old
         WHERE 
-            script_name NOT IN (SELECT name FROM racktables_django.api_tag);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_tag);
 
     UPDATE
         racktables_django.api_tag AS tag

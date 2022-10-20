@@ -9,7 +9,7 @@ BEGIN
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanswitchtemplate);
 
     INSERT INTO 
-        racktables_django.api_rackobject (oldid,revision,description,modifiedby_id) 
+        racktables_django.api_vlanswitchtemplate (oldid,revision,description,modifiedby_id) 
         SELECT 
              old.id
             ,old.mutex_rev
@@ -19,7 +19,7 @@ BEGIN
              racktables.VLANSwitchTemplate as old
              LEFT JOIN racktables_django.api_useraccount as usr on old.saved_by = usr.username COLLATE utf8_unicode_ci
         WHERE 
-            old.id NOT IN (SELECT oldid FROM racktables_django.VLANSwitchTemplate);
+            old.id NOT IN (SELECT oldid FROM racktables_django.api_vlanswitchtemplate);
 
     SET inserted = (SELECT count(id) FROM racktables_django.api_vlanswitchtemplate) - inserted;
     RETURN inserted;

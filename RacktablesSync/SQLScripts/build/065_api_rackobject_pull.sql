@@ -12,8 +12,8 @@ BEGIN
         SELECT 
              old.id
             ,old.name
-            ,old.label
-            ,old.assetno
+            ,ifnull(old.label,"")
+            ,ifnull(old.asset_no,"")
             ,CASE 
                 WHEN old.has_problems = 'yes' THEN 1
                 ELSE 0
@@ -24,7 +24,7 @@ BEGIN
         FROM 
              racktables.RackObject as old
              LEFT JOIN racktables_django.api_objecttype as objecttype on objecttype.oldid = old.objtype_id
-             LEFT JOIN racktables_django.api_object as linkedobject on linkedobject.name = old.assetno
+             LEFT JOIN racktables_django.api_object as linkedobject on linkedobject.name = old.asset_no COLLATE utf8_general_ci
         WHERE 
             old.id NOT IN (SELECT oldid FROM racktables_django.api_rackobject);
 
