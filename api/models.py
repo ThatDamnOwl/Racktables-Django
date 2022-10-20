@@ -386,7 +386,7 @@ class VLANIPv4(models.Model):
 
 class VLANIPv6(models.Model):
 	vlan = models.ForeignKey(VLANDescription, on_delete=models.CASCADE)
-	ipv6address = models.ForeignKey(IPv6Network, on_delete=models.CASCADE)
+	ipv6network = models.ForeignKey(IPv6Network, on_delete=models.CASCADE)
 
 class PortAllowedVLAN(models.Model):
 	port = models.ForeignKey(Port, on_delete=models.CASCADE)
