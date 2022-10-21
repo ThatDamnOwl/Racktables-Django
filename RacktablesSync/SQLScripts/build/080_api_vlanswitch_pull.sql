@@ -14,19 +14,19 @@ BEGIN
              old.mutex_rev
             ,old.last_errno
             ,CASE 
-                WHEN old.last_error_ts = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                WHEN old.last_error_ts = 0 THEN '1970/01/01 00:00:01'
                 ELSE old.last_error_ts
              END as last_error_time
             ,CASE 
-                WHEN old.last_change = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                WHEN old.last_change = 0 THEN '1970/01/01 00:00:01'
                 ELSE old.last_change
              END as last_change_time
             ,CASE 
-                WHEN old.last_push_started = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                WHEN old.last_push_started = 0 THEN '1970/01/01 00:00:01'
                 ELSE old.last_push_started
              END as last_push_started_time
             ,CASE 
-                WHEN old.last_push_finished = '0000-00-00 00:00:00' THEN '1970/01/01 00:00:01'
+                WHEN old.last_push_finished = 0 THEN '1970/01/01 00:00:01'
                 ELSE old.last_push_finished
              END as last_push_finished_time
             ,domain.id
