@@ -4,4 +4,4 @@ thumbs.db
 *.json
 .env
 */env/*
-*/*pycache*/*
+*__pycache__*
