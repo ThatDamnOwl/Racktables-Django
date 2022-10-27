@@ -38,6 +38,7 @@ def UserAccount_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = UserAccountSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -85,6 +86,7 @@ def UserConfig_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = UserConfigSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -132,6 +134,7 @@ def Molecule_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = MoleculeSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -179,6 +182,7 @@ def Location_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = LocationSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -226,6 +230,7 @@ def Row_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = RowSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -273,6 +278,7 @@ def Rack_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = RackSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -320,6 +326,7 @@ def Atom_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = AtomSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -367,6 +374,7 @@ def Attribute_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = AttributeSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -414,6 +422,7 @@ def Chapter_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = ChapterSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -461,6 +470,7 @@ def Dictionary_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = DictionarySerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -508,6 +518,7 @@ def ObjectType_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = ObjectTypeSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -555,6 +566,7 @@ def Object_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = ObjectSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -602,6 +614,7 @@ def AttributeMap_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = AttributeMapSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -641,30 +654,31 @@ def AttributeValueString_List(request):
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 @api_view(['GET','PUT','DELETE'])
-def AttributeValueStrin_Detail(request,pk):
-        try:
-            req_object = AttributeValueStrin.objects.get(pk=pk)
-        except req_object.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+def AttributeValueString_Detail(request,pk):
+    try:
+        req_object = AttributeValueString.objects.get(pk=pk)
+    except req_object.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-        match (request.method):
-            case "GET":
-                serializer = AttributeValueStrinSerializer(req_object, context={'request': request}, many=False)
-            case "POST":
-                return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
-            case "PATCH":
-                return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
-            case "DELETE":
-                req_object.delete()
+    match (request.method):
+        case "GET":
+            serializer = AttributeValueStringSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
+        case "POST":
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        case "PATCH":
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        case "DELETE":
+            req_object.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        case "PUT":
+            serializer = AttributeValueStringSerializer(req_object, data=request.data, context={'request': request})
+            if serializer.is_valid():
+                serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
-            case "PUT":
-                serializer = AttributeValueStrinSerializer(req_object, data=request.data, context={'request': request})
-                if serializer.is_valid():
-                    serializer.save()
-                    return Response(status=status.HTTP_204_NO_CONTENT)
-            case _:
-                return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        case _:
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     
 @api_view(['GET','POST'])
@@ -698,6 +712,7 @@ def AttributeValueInt_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = AttributeValueIntSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -745,6 +760,7 @@ def AttributeValueFloat_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = AttributeValueFloatSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -792,6 +808,7 @@ def AttributeValueDict_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = AttributeValueDictSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -839,6 +856,7 @@ def AttributeValueDate_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = AttributeValueDateSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -886,6 +904,7 @@ def IPv4Address_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv4AddressSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -933,6 +952,7 @@ def IPv4VS_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv4VSSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -980,6 +1000,7 @@ def IPv4Allocation_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv4AllocationSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1027,6 +1048,7 @@ def IPv4RSPool_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv4RSPoolSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1074,6 +1096,7 @@ def IPv4RS_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv4RSSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1121,6 +1144,7 @@ def IPv4LB_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv4LBSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1168,6 +1192,7 @@ def IPv4Log_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv4LogSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1215,6 +1240,7 @@ def IPv4NAT_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv4NATSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1262,6 +1288,7 @@ def IPv4Network_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv4NetworkSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1309,6 +1336,7 @@ def IPv6Address_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv6AddressSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1356,6 +1384,7 @@ def IPv6Allocation_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv6AllocationSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1403,6 +1432,7 @@ def IPv6Log_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv6LogSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1450,6 +1480,7 @@ def IPv6Network_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = IPv6NetworkSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1497,6 +1528,7 @@ def Config_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = ConfigSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1544,6 +1576,7 @@ def File_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1591,6 +1624,7 @@ def FileLinkIPv4Network_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileLinkIPv4NetworkSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1638,6 +1672,7 @@ def FileLinkIPv4RSPool_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileLinkIPv4RSPoolSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1685,6 +1720,7 @@ def FileLinkIPv4VS_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileLinkIPv4VSSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1732,6 +1768,7 @@ def FileLinkIPv6Network_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileLinkIPv6NetworkSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1779,6 +1816,7 @@ def FileLinkLocation_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileLinkLocationSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1826,6 +1864,7 @@ def FileLinkObject_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileLinkObjectSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1873,6 +1912,7 @@ def FileLinkRack_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileLinkRackSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1920,6 +1960,7 @@ def FileLinkRow_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileLinkRowSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1967,6 +2008,7 @@ def FileLinkUser_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = FileLinkUserSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2014,6 +2056,7 @@ def MountOperation_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = MountOperationSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2061,6 +2104,7 @@ def ObjectHistory_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = ObjectHistorySerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2108,6 +2152,7 @@ def ObjectLog_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = ObjectLogSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2155,6 +2200,7 @@ def PatchCableConnector_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PatchCableConnectorSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2202,6 +2248,7 @@ def PatchCableType_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PatchCableTypeSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2240,30 +2287,31 @@ def PatchCableConnectorCompat_List(request):
         case _:
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 @api_view(['GET','PUT','DELETE'])
-def PatchCableConnector_DetailCompat(request,pk):
-        try:
-            req_object = PatchCableConnector.objects.get(pk=pk)
-        except req_object.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+def PatchCableConnectorCompat_Detail(request,pk):
+    try:
+        req_object = PatchCableConnectorCompat.objects.get(pk=pk)
+    except req_object.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-        match (request.method):
-            case "GET":
-                serializer = PatchCableConnectorSerializer(req_object, context={'request': request}, many=False)
-            case "POST":
-                return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
-            case "PATCH":
-                return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
-            case "DELETE":
-                req_object.delete()
+    match (request.method):
+        case "GET":
+            serializer = PatchCableConnectorCompatSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
+        case "POST":
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        case "PATCH":
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        case "DELETE":
+            req_object.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        case "PUT":
+            serializer = PatchCableConnectorCompatSerializer(req_object, data=request.data, context={'request': request})
+            if serializer.is_valid():
+                serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
-            case "PUT":
-                serializer = PatchCableConnectorSerializer(req_object, data=request.data, context={'request': request})
-                if serializer.is_valid():
-                    serializer.save()
-                    return Response(status=status.HTTP_204_NO_CONTENT)
-            case _:
-                return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        case _:
+            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     
 @api_view(['GET','POST'])
@@ -2297,6 +2345,7 @@ def PatchCableHeap_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PatchCableHeapSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2344,6 +2393,7 @@ def PatchCableHeapLog_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PatchCableHeapLogSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2391,6 +2441,7 @@ def Plugin_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PluginSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2438,6 +2489,7 @@ def PortInnerInterface_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PortInnerInterfaceSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2485,6 +2537,7 @@ def PortOuterInterface_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PortOuterInterfaceSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2532,6 +2585,7 @@ def PatchCableOIFCompat_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PatchCableOIFCompatSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2579,6 +2633,7 @@ def Port_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PortSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2626,6 +2681,7 @@ def VLANDomain_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VLANDomainSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2673,6 +2729,7 @@ def VLANDescription_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VLANDescriptionSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2720,6 +2777,7 @@ def VLANIPv4_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VLANIPv4Serializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2767,6 +2825,7 @@ def VLANIPv6_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VLANIPv6Serializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2814,6 +2873,7 @@ def PortAllowedVLAN_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PortAllowedVLANSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2861,6 +2921,7 @@ def PortCompat_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PortCompatSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2908,6 +2969,7 @@ def PortInterfaceCompat_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PortInterfaceCompatSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2955,6 +3017,7 @@ def PortLog_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PortLogSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3002,6 +3065,7 @@ def PortVLANMode_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = PortVLANModeSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3049,6 +3113,7 @@ def RackObject_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = RackObjectSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3096,6 +3161,7 @@ def RackSpace_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = RackSpaceSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3143,6 +3209,7 @@ def RackThumbnail_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = RackThumbnailSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3190,6 +3257,7 @@ def Script_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = ScriptSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3237,6 +3305,7 @@ def Tag_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = TagSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3284,6 +3353,7 @@ def TagFile_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = TagFileSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3331,6 +3401,7 @@ def TagIPv4Network_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = TagIPv4NetworkSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3378,6 +3449,7 @@ def TagIPv4RSPool_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = TagIPv4RSPoolSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3425,6 +3497,7 @@ def TagIPv4VS_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = TagIPv4VSSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3472,6 +3545,7 @@ def TagIPv6Network_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = TagIPv6NetworkSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3519,6 +3593,7 @@ def TagLocation_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = TagLocationSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3566,6 +3641,7 @@ def TagObject_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = TagObjectSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3613,6 +3689,7 @@ def TagRack_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = TagRackSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3660,6 +3737,7 @@ def VLANSTRule_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VLANSTRuleSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3707,6 +3785,7 @@ def VLANSwitchTemplate_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VLANSwitchTemplateSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3754,6 +3833,7 @@ def VLANSwitch_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VLANSwitchSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3801,6 +3881,7 @@ def VLANValidID_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VLANValidIDSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3848,6 +3929,7 @@ def VS_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VSSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3895,6 +3977,7 @@ def VSEnabledIPs_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VSEnabledIPsSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3942,6 +4025,7 @@ def VSEnabledPorts_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VSEnabledPortsSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3989,6 +4073,7 @@ def VSIPs_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VSIPsSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -4036,6 +4121,7 @@ def VSPorts_Detail(request,pk):
     match (request.method):
         case "GET":
             serializer = VSPortsSerializer(req_object, context={'request': request}, many=False)
+            return Response(serializer.data)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
