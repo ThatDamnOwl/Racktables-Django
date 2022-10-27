@@ -9,7 +9,7 @@ from .serializers import *
 
 @api_view(['GET', 'POST'])
 def UserAccount_List(request):
-    match request.method:
+    match (request.method):
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -35,7 +35,7 @@ def UserAccount_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -56,7 +56,7 @@ def UserAccount_Detail(request,pk):
 
 @api_view('GET','POST')
 def UserConfig_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -82,7 +82,7 @@ def UserConfig_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -103,7 +103,7 @@ def UserConfig_Detail(request,pk):
 
 @api_view('GET','POST')
 def Molecule_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -129,7 +129,7 @@ def Molecule_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -150,7 +150,7 @@ def Molecule_Detail(request,pk):
 
 @api_view('GET','POST')
 def Location_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -176,7 +176,7 @@ def Location_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -197,7 +197,7 @@ def Location_Detail(request,pk):
 
 @api_view('GET','POST')
 def Row_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -223,7 +223,7 @@ def Row_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -244,7 +244,7 @@ def Row_Detail(request,pk):
 
 @api_view('GET','POST')
 def Rack_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -270,7 +270,7 @@ def Rack_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -291,7 +291,7 @@ def Rack_Detail(request,pk):
 
 @api_view('GET','POST')
 def Atom_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -317,7 +317,7 @@ def Atom_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -338,7 +338,7 @@ def Atom_Detail(request,pk):
 
 @api_view('GET','POST')
 def Attribute_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -364,7 +364,7 @@ def Attribute_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -385,7 +385,7 @@ def Attribute_Detail(request,pk):
 
 @api_view('GET','POST')
 def Chapter_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -411,7 +411,7 @@ def Chapter_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -432,7 +432,7 @@ def Chapter_Detail(request,pk):
 
 @api_view('GET','POST')
 def Dictionary_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -458,7 +458,7 @@ def Dictionary_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -479,7 +479,7 @@ def Dictionary_Detail(request,pk):
 
 @api_view('GET','POST')
 def ObjectType_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -505,7 +505,7 @@ def ObjectType_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -526,7 +526,7 @@ def ObjectType_Detail(request,pk):
 
 @api_view('GET','POST')
 def Object_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -552,7 +552,7 @@ def Object_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -573,7 +573,7 @@ def Object_Detail(request,pk):
 
 @api_view('GET','POST')
 def AttributeMap_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -599,7 +599,7 @@ def AttributeMap_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -621,7 +621,7 @@ def AttributeMap_Detail(request,pk):
 @api_view('GET','POST')
 def AttributeValueString_List(request):
 
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -648,7 +648,7 @@ def AttributeValueStrin_Detail(request,pk):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-        match request.method:
+        match(request.method)
             case "GET":
                 serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
             case "POST":
@@ -669,7 +669,7 @@ def AttributeValueStrin_Detail(request,pk):
     
 @api_view('GET','POST')
 def AttributeValueInt_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -695,7 +695,7 @@ def AttributeValueInt_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -716,7 +716,7 @@ def AttributeValueInt_Detail(request,pk):
 
 @api_view('GET','POST')
 def AttributeValueFloat_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -742,7 +742,7 @@ def AttributeValueFloat_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -763,7 +763,7 @@ def AttributeValueFloat_Detail(request,pk):
 
 @api_view('GET','POST')
 def AttributeValueDict_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -789,7 +789,7 @@ def AttributeValueDict_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -810,7 +810,7 @@ def AttributeValueDict_Detail(request,pk):
 
 @api_view('GET','POST')
 def AttributeValueDate_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -836,7 +836,7 @@ def AttributeValueDate_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -857,7 +857,7 @@ def AttributeValueDate_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4Address_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -883,7 +883,7 @@ def IPv4Address_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -904,7 +904,7 @@ def IPv4Address_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4VS_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -930,7 +930,7 @@ def IPv4VS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -951,7 +951,7 @@ def IPv4VS_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4Allocation_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -977,7 +977,7 @@ def IPv4Allocation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -998,7 +998,7 @@ def IPv4Allocation_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4RSPool_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1024,7 +1024,7 @@ def IPv4RSPool_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1045,7 +1045,7 @@ def IPv4RSPool_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4RS_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1071,7 +1071,7 @@ def IPv4RS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1092,7 +1092,7 @@ def IPv4RS_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4LB_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1118,7 +1118,7 @@ def IPv4LB_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1139,7 +1139,7 @@ def IPv4LB_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4Log_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1165,7 +1165,7 @@ def IPv4Log_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1186,7 +1186,7 @@ def IPv4Log_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4NAT_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1212,7 +1212,7 @@ def IPv4NAT_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1233,7 +1233,7 @@ def IPv4NAT_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4Network_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1259,7 +1259,7 @@ def IPv4Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1280,7 +1280,7 @@ def IPv4Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv6Address_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1306,7 +1306,7 @@ def IPv6Address_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1327,7 +1327,7 @@ def IPv6Address_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv6Allocation_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1353,7 +1353,7 @@ def IPv6Allocation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1374,7 +1374,7 @@ def IPv6Allocation_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv6Log_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1400,7 +1400,7 @@ def IPv6Log_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1421,7 +1421,7 @@ def IPv6Log_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv6Network_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1447,7 +1447,7 @@ def IPv6Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1468,7 +1468,7 @@ def IPv6Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def Config_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1494,7 +1494,7 @@ def Config_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1515,7 +1515,7 @@ def Config_Detail(request,pk):
 
 @api_view('GET','POST')
 def File_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1541,7 +1541,7 @@ def File_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1562,7 +1562,7 @@ def File_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkIPv4Network_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1588,7 +1588,7 @@ def FileLinkIPv4Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1609,7 +1609,7 @@ def FileLinkIPv4Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkIPv4RSPool_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1635,7 +1635,7 @@ def FileLinkIPv4RSPool_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1656,7 +1656,7 @@ def FileLinkIPv4RSPool_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkIPv4VS_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1682,7 +1682,7 @@ def FileLinkIPv4VS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1703,7 +1703,7 @@ def FileLinkIPv4VS_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkIPv6Network_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1729,7 +1729,7 @@ def FileLinkIPv6Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1750,7 +1750,7 @@ def FileLinkIPv6Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkLocation_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1776,7 +1776,7 @@ def FileLinkLocation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1797,7 +1797,7 @@ def FileLinkLocation_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkObject_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1823,7 +1823,7 @@ def FileLinkObject_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1844,7 +1844,7 @@ def FileLinkObject_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkRack_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1870,7 +1870,7 @@ def FileLinkRack_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1891,7 +1891,7 @@ def FileLinkRack_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkRow_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1917,7 +1917,7 @@ def FileLinkRow_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1938,7 +1938,7 @@ def FileLinkRow_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkUser_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -1964,7 +1964,7 @@ def FileLinkUser_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -1985,7 +1985,7 @@ def FileLinkUser_Detail(request,pk):
 
 @api_view('GET','POST')
 def MountOperation_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2011,7 +2011,7 @@ def MountOperation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2032,7 +2032,7 @@ def MountOperation_Detail(request,pk):
 
 @api_view('GET','POST')
 def ObjectHistory_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2058,7 +2058,7 @@ def ObjectHistory_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2079,7 +2079,7 @@ def ObjectHistory_Detail(request,pk):
 
 @api_view('GET','POST')
 def ObjectLog_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2105,7 +2105,7 @@ def ObjectLog_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2126,7 +2126,7 @@ def ObjectLog_Detail(request,pk):
 
 @api_view('GET','POST')
 def PatchCableConnector_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2152,7 +2152,7 @@ def PatchCableConnector_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2173,7 +2173,7 @@ def PatchCableConnector_Detail(request,pk):
 
 @api_view('GET','POST')
 def PatchCableType_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2199,7 +2199,7 @@ def PatchCableType_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2221,7 +2221,7 @@ def PatchCableType_Detail(request,pk):
 @api_view('GET','POST')
 def PatchCableConnectorCompat_List(request):
 
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2247,7 +2247,7 @@ def PatchCableConnector_DetailCompat(request,pk):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-        match request.method:
+        match(request.method)
             case "GET":
                 serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
             case "POST":
@@ -2268,7 +2268,7 @@ def PatchCableConnector_DetailCompat(request,pk):
     
 @api_view('GET','POST')
 def PatchCableHeap_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2294,7 +2294,7 @@ def PatchCableHeap_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2315,7 +2315,7 @@ def PatchCableHeap_Detail(request,pk):
 
 @api_view('GET','POST')
 def PatchCableHeapLog_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2341,7 +2341,7 @@ def PatchCableHeapLog_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2362,7 +2362,7 @@ def PatchCableHeapLog_Detail(request,pk):
 
 @api_view('GET','POST')
 def Plugin_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2388,7 +2388,7 @@ def Plugin_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2409,7 +2409,7 @@ def Plugin_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortInnerInterface_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2435,7 +2435,7 @@ def PortInnerInterface_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2456,7 +2456,7 @@ def PortInnerInterface_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortOuterInterface_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2482,7 +2482,7 @@ def PortOuterInterface_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2503,7 +2503,7 @@ def PortOuterInterface_Detail(request,pk):
 
 @api_view('GET','POST')
 def PatchCableOIFCompat_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2529,7 +2529,7 @@ def PatchCableOIFCompat_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2550,7 +2550,7 @@ def PatchCableOIFCompat_Detail(request,pk):
 
 @api_view('GET','POST')
 def Port_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2576,7 +2576,7 @@ def Port_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2597,7 +2597,7 @@ def Port_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANDomain_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2623,7 +2623,7 @@ def VLANDomain_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2644,7 +2644,7 @@ def VLANDomain_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANDescription_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2670,7 +2670,7 @@ def VLANDescription_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2691,7 +2691,7 @@ def VLANDescription_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANIPv4_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2717,7 +2717,7 @@ def VLANIPv4_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2738,7 +2738,7 @@ def VLANIPv4_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANIPv6_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2764,7 +2764,7 @@ def VLANIPv6_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2785,7 +2785,7 @@ def VLANIPv6_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortAllowedVLAN_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2811,7 +2811,7 @@ def PortAllowedVLAN_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2832,7 +2832,7 @@ def PortAllowedVLAN_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortCompat_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2858,7 +2858,7 @@ def PortCompat_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2879,7 +2879,7 @@ def PortCompat_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortInterfaceCompat_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2905,7 +2905,7 @@ def PortInterfaceCompat_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2926,7 +2926,7 @@ def PortInterfaceCompat_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortLog_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2952,7 +2952,7 @@ def PortLog_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -2973,7 +2973,7 @@ def PortLog_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortVLANMode_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -2999,7 +2999,7 @@ def PortVLANMode_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3020,7 +3020,7 @@ def PortVLANMode_Detail(request,pk):
 
 @api_view('GET','POST')
 def RackObject_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3046,7 +3046,7 @@ def RackObject_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3067,7 +3067,7 @@ def RackObject_Detail(request,pk):
 
 @api_view('GET','POST')
 def RackSpace_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3093,7 +3093,7 @@ def RackSpace_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3114,7 +3114,7 @@ def RackSpace_Detail(request,pk):
 
 @api_view('GET','POST')
 def RackThumbnail_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3140,7 +3140,7 @@ def RackThumbnail_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3161,7 +3161,7 @@ def RackThumbnail_Detail(request,pk):
 
 @api_view('GET','POST')
 def Script_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3187,7 +3187,7 @@ def Script_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3208,7 +3208,7 @@ def Script_Detail(request,pk):
 
 @api_view('GET','POST')
 def Tag_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3234,7 +3234,7 @@ def Tag_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3255,7 +3255,7 @@ def Tag_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagFile_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3281,7 +3281,7 @@ def TagFile_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3302,7 +3302,7 @@ def TagFile_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagIPv4Network_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3328,7 +3328,7 @@ def TagIPv4Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3349,7 +3349,7 @@ def TagIPv4Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagIPv4RSPool_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3375,7 +3375,7 @@ def TagIPv4RSPool_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3396,7 +3396,7 @@ def TagIPv4RSPool_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagIPv4VS_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3422,7 +3422,7 @@ def TagIPv4VS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3443,7 +3443,7 @@ def TagIPv4VS_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagIPv6Network_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3469,7 +3469,7 @@ def TagIPv6Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3490,7 +3490,7 @@ def TagIPv6Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagLocation_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3516,7 +3516,7 @@ def TagLocation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3537,7 +3537,7 @@ def TagLocation_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagObject_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3563,7 +3563,7 @@ def TagObject_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3584,7 +3584,7 @@ def TagObject_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagRack_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3610,7 +3610,7 @@ def TagRack_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3631,7 +3631,7 @@ def TagRack_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANSTRule_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3657,7 +3657,7 @@ def VLANSTRule_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3678,7 +3678,7 @@ def VLANSTRule_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANSwitchTemplate_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3704,7 +3704,7 @@ def VLANSwitchTemplate_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3725,7 +3725,7 @@ def VLANSwitchTemplate_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANSwitch_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3751,7 +3751,7 @@ def VLANSwitch_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3772,7 +3772,7 @@ def VLANSwitch_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANValidID_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3798,7 +3798,7 @@ def VLANValidID_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3819,7 +3819,7 @@ def VLANValidID_Detail(request,pk):
 
 @api_view('GET','POST')
 def VS_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3845,7 +3845,7 @@ def VS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3866,7 +3866,7 @@ def VS_Detail(request,pk):
 
 @api_view('GET','POST')
 def VSEnabledIPs_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3892,7 +3892,7 @@ def VSEnabledIPs_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3913,7 +3913,7 @@ def VSEnabledIPs_Detail(request,pk):
 
 @api_view('GET','POST')
 def VSEnabledPorts_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3939,7 +3939,7 @@ def VSEnabledPorts_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -3960,7 +3960,7 @@ def VSEnabledPorts_Detail(request,pk):
 
 @api_view('GET','POST')
 def VSIPs_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -3986,7 +3986,7 @@ def VSIPs_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
@@ -4007,7 +4007,7 @@ def VSIPs_Detail(request,pk):
 
 @api_view('GET','POST')
 def VSPorts_List(request):
-    match request.method:
+    match(request.method)
         case "GET":
             data = INSERT_MODEL_HERE.objects.all()
             serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
@@ -4033,7 +4033,7 @@ def VSPorts_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match request.method:
+    match(request.method)
         case "GET":
             serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
         case "POST":
