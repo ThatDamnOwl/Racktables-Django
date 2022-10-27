@@ -1,518 +1,435 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-        
-class UserAccountSerializer (serializer.ModelSerializer):
+from .models import *
 
-    class Meta:UserAccount
-        model = 
-        fields = ('')
 
-class UserConfigSerializer (serializer.ModelSerializer):
+class UserAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAccount
+        fields = ('oldid','username','realname','user')
 
+class UserConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserConfig
-        fields = ('')
+        fields = ('user','varname','varvalue')
 
-class MoleculeSerializer (serializer.ModelSerializer):
-
+class MoleculeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Molecule
-        fields = ('')
+        fields = ('oldid','description')
 
-class LocationSerializer (serializer.ModelSerializer):
-
+class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ('')
+        fields = ('oldid','name','hasproblems','comment','parentlocation')
 
-class RowSerializer (serializer.ModelSerializer):
-
+class RowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Row
-        fields = ('')
+        fields = ('oldid','name','location')
 
-class RackSerializer (serializer.ModelSerializer):
-
+class RackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rack
-        fields = ('')
+        fields = ('oldid','name','assetno','hasproblems','comment','height','position','row')
 
-class AtomSerializer (serializer.ModelSerializer):
-
+class AtomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Atom
-        fields = ('')
+        fields = ('molecule','rack','unit_no','xaxis','yaxis','zaxis')
 
-class AttributeSerializer (serializer.ModelSerializer):
-
+class AttributeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attribute
-        fields = ('')
+        fields = ('oldid','attribute_type','name')
 
-class ChapterSerializer (serializer.ModelSerializer):
-
+class ChapterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chapter
-        fields = ('')
+        fields = ('oldid','sticky','name')
 
-class DictionarySerializer (serializer.ModelSerializer):
-
+class DictionarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Dictionary
-        fields = ('')
+        fields = ('chapter','oldid','sticky','value')
 
-class ObjectTypeSerializer (serializer.ModelSerializer):
-
+class ObjectTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ObjectType
-        fields = ('')
+        fields = ('name','oldid','sticky')
 
-class ObjectSerializer (serializer.ModelSerializer):
-
+class ObjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Object
-        fields = ('')
+        fields = ('oldid','name','label','objecttype','assetno','hasproblems','comment','parentobject')
 
-class AttributeMapSerializer (serializer.ModelSerializer):
-
+class AttributeMapSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttributeMap
-        fields = ('')
+        fields = ('attribute','objecttype','chapter','sticky')
 
-class AttributeValueStrinSerializer (serializer.ModelSerializer):
-
+class AttributeValueStringSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AttributeValueStrin
-        fields = ('')
+        model = AttributeValueString
+        fields = ('parentobject','attributemap','value')
 
-class AttributeValueIntSerializer (serializer.ModelSerializer):
-
+class AttributeValueIntSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttributeValueInt
-        fields = ('')
+        fields = ('parentobject','attributemap','value')
 
-class AttributeValueFloatSerializer (serializer.ModelSerializer):
-
+class AttributeValueFloatSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttributeValueFloat
-        fields = ('')
+        fields = ('parentobject','attributemap','value')
 
-class AttributeValueDictSerializer (serializer.ModelSerializer):
-
+class AttributeValueDictSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttributeValueDict
-        fields = ('')
+        fields = ('parentobject','attributemap','dictionaryvalue')
 
-class AttributeValueDateSerializer (serializer.ModelSerializer):
-
+class AttributeValueDateSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttributeValueDate
-        fields = ('')
+        fields = ('parentobject','attributemap','value')
 
-class IPv4AddressSerializer (serializer.ModelSerializer):
-
+class IPv4AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv4Address
-        fields = ('')
+        fields = ('ip','oldip','name','comment','reserved')
 
-class IPv4VSSerializer (serializer.ModelSerializer):
-
+class IPv4VSSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv4VS
-        fields = ('')
+        fields = ('oldid','vip','oldvip','vport','protocol')
 
-class IPv4AllocationSerializer (serializer.ModelSerializer):
-
+class IPv4AllocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv4Allocation
-        fields = ('')
+        fields = ('parentobject','ip','name','alloctype')
 
-class IPv4RSPoolSerializer (serializer.ModelSerializer):
-
+class IPv4RSPoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv4RSPool
-        fields = ('')
+        fields = ('oldid','name','vsconfig','rsconfig')
 
-class IPv4RSSerializer (serializer.ModelSerializer):
-
+class IPv4RSSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv4RS
-        fields = ('')
+        fields = ('oldid','inservice','rsip','oldrsip','rsport','rspool','rsconfig','comment')
 
-class IPv4LBSerializer (serializer.ModelSerializer):
-
+class IPv4LBSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv4LB
-        fields = ('')
+        fields = ('parentobject','parentipv4rspool','parentipv4vs','prio','vsconfig','rsconfig')
 
-class IPv4LogSerializer (serializer.ModelSerializer):
-
+class IPv4LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv4Log
-        fields = ('')
+        fields = ('oldid','ip','date','user','message')
 
-class IPv4NATSerializer (serializer.ModelSerializer):
-
+class IPv4NATSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv4NAT
-        fields = ('')
+        fields = ('parentobject','protocol','localip','localport','remoteip','remoteport','description')
 
-class IPv4NetworkSerializer (serializer.ModelSerializer):
-
+class IPv4NetworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv4Network
-        fields = ('')
+        fields = ('oldid','ip','oldip','mask','name','comment')
 
-class IPv6AddressSerializer (serializer.ModelSerializer):
-
+class IPv6AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv6Address
-        fields = ('')
+        fields = ('ip','oldip','name','comment','reserved')
 
-class IPv6AllocationSerializer (serializer.ModelSerializer):
-
+class IPv6AllocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv6Allocation
-        fields = ('')
+        fields = ('parentobject','ip','name','alloctype')
 
-class IPv6LogSerializer (serializer.ModelSerializer):
-
+class IPv6LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv6Log
-        fields = ('')
+        fields = ('oldid','ip','date','user','message')
 
-class IPv6NetworkSerializer (serializer.ModelSerializer):
-
+class IPv6NetworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = IPv6Network
-        fields = ('')
+        fields = ('oldid','ip','oldip','mask','lastip','oldlastip','name','comment')
 
-class ConfigSerializer (serializer.ModelSerializer):
-
+class ConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = Config
-        fields = ('')
+        fields = ('name','value','vartype','nullable','hidden','userdefined','description')
 
-class FileSerializer (serializer.ModelSerializer):
-
+class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = ('')
+        fields = ('oldid','name','filetype','size','created','modified','accessed','thumbnail','content','comment')
 
-class FileLinkIPv4NetworkSerializer (serializer.ModelSerializer):
-
+class FileLinkIPv4NetworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileLinkIPv4Network
-        fields = ('')
+        fields = ('oldid','parent','file')
 
-class FileLinkIPv4RSPoolSerializer (serializer.ModelSerializer):
-
+class FileLinkIPv4RSPoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileLinkIPv4RSPool
-        fields = ('')
+        fields = ('oldid','parent','file')
 
-class FileLinkIPv4VSSerializer (serializer.ModelSerializer):
-
+class FileLinkIPv4VSSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileLinkIPv4VS
-        fields = ('')
+        fields = ('oldid','parent','file')
 
-class FileLinkIPv6NetworkSerializer (serializer.ModelSerializer):
-
+class FileLinkIPv6NetworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileLinkIPv6Network
-        fields = ('')
+        fields = ('oldid','parent','file')
 
-class FileLinkLocationSerializer (serializer.ModelSerializer):
-
+class FileLinkLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileLinkLocation
-        fields = ('')
+        fields = ('oldid','parent','file')
 
-class FileLinkObjectSerializer (serializer.ModelSerializer):
-
+class FileLinkObjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileLinkObject
-        fields = ('')
+        fields = ('oldid','parent','file')
 
-class FileLinkRackSerializer (serializer.ModelSerializer):
-
+class FileLinkRackSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileLinkRack
-        fields = ('')
+        fields = ('oldid','parent','file')
 
-class FileLinkRowSerializer (serializer.ModelSerializer):
-
+class FileLinkRowSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileLinkRow
-        fields = ('')
+        fields = ('oldid','parent','file')
 
-class FileLinkUserSerializer (serializer.ModelSerializer):
-
+class FileLinkUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileLinkUser
-        fields = ('')
+        fields = ('oldid','parent','file')
 
-class MountOperationSerializer (serializer.ModelSerializer):
-
+class MountOperationSerializer(serializers.ModelSerializer):
     class Meta:
         model = MountOperation
-        fields = ('')
+        fields = ('oldid','changedobject','changedtime','user','old_molecule','new_molecule','comment')
 
-class ObjectHistorySerializer (serializer.ModelSerializer):
-
+class ObjectHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = ObjectHistory
-        fields = ('')
+        fields = ('oldeventid','oldid','name','label','changedobject','assetno','changedtime','user','hasproblems','comment')
 
-class ObjectLogSerializer (serializer.ModelSerializer):
-
+class ObjectLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = ObjectLog
-        fields = ('')
+        fields = ('oldid','parentobject','user','date','content')
 
-class PatchCableConnectorSerializer (serializer.ModelSerializer):
-
+class PatchCableConnectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatchCableConnector
-        fields = ('')
+        fields = ('oldid','defaultvalue','connectorname')
 
-class PatchCableTypeSerializer (serializer.ModelSerializer):
-
+class PatchCableTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatchCableType
-        fields = ('')
+        fields = ('oldid','defaultvalue','cabletype')
 
-class PatchCableConnectorSerializer (serializer.ModelSerializer):
-
+class PatchCableConnectorCompatSerializer(serializers.ModelSerializer):
     class Meta:
-        model = PatchCableConnector
-        fields = ('')
+        model = PatchCableConnectorCompat
+        fields = ('cabletype','connector')
 
-class PatchCableHeapSerializer (serializer.ModelSerializer):
-
+class PatchCableHeapSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatchCableHeap
-        fields = ('')
+        fields = ('oldid','amount','colour','length','end1','end2','cabletype','description')
 
-class PatchCableHeapLogSerializer (serializer.ModelSerializer):
-
+class PatchCableHeapLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatchCableHeapLog
-        fields = ('')
+        fields = ('oldid','heap','date','user','comment')
 
-class PluginSerializer (serializer.ModelSerializer):
-
+class PluginSerializer(serializers.ModelSerializer):
     class Meta:
         model = Plugin
-        fields = ('')
+        fields = ('name','longname','version','homeurl','state')
 
-class PortInnerInterfaceSerializer (serializer.ModelSerializer):
-
+class PortInnerInterfaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortInnerInterface
-        fields = ('')
+        fields = ('oldid','name')
 
-class PortOuterInterfaceSerializer (serializer.ModelSerializer):
-
+class PortOuterInterfaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortOuterInterface
-        fields = ('')
+        fields = ('oldid','name')
 
-class PatchCableOIFCompatSerializer (serializer.ModelSerializer):
-
+class PatchCableOIFCompatSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatchCableOIFCompat
-        fields = ('')
+        fields = ('cabletype','interfacetype')
 
-class PortSerializer (serializer.ModelSerializer):
-
+class PortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Port
-        fields = ('')
+        fields = ('oldid','parentobject','name','label','comment','l2address','innerinterface','outerinterface','patch','attachedport')
 
-class VLANDomainSerializer (serializer.ModelSerializer):
-
+class VLANDomainSerializer(serializers.ModelSerializer):
     class Meta:
         model = VLANDomain
-        fields = ('')
+        fields = ('oldid','parentdomain','description')
 
-class VLANDescriptionSerializer (serializer.ModelSerializer):
-
+class VLANDescriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = VLANDescription
-        fields = ('')
+        fields = ('domain','vlan','vlantype','description')
 
-class VLANIPv4Serializer (serializer.ModelSerializer):
-
+class VLANIPv4Serializer(serializers.ModelSerializer):
     class Meta:
         model = VLANIPv4
-        fields = ('')
+        fields = ('vlan','ipv4net')
 
-class VLANIPv6Serializer (serializer.ModelSerializer):
-
+class VLANIPv6Serializer(serializers.ModelSerializer):
     class Meta:
         model = VLANIPv6
-        fields = ('')
+        fields = ('vlan','ipv6network')
 
-class PortAllowedVLANSerializer (serializer.ModelSerializer):
-
+class PortAllowedVLANSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortAllowedVLAN
-        fields = ('')
+        fields = ('port','vlan','native')
 
-class PortCompatSerializer (serializer.ModelSerializer):
-
+class PortCompatSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortCompat
-        fields = ('')
+        fields = ('port1','port2')
 
-class PortInterfaceCompatSerializer (serializer.ModelSerializer):
-
+class PortInterfaceCompatSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortInterfaceCompat
-        fields = ('')
+        fields = ('portinnerinterface','portouterinterface')
 
-class PortLogSerializer (serializer.ModelSerializer):
-
+class PortLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortLog
-        fields = ('')
+        fields = ('oldid','port','date','user','comment')
 
-class PortVLANModeSerializer (serializer.ModelSerializer):
-
+class PortVLANModeSerializer(serializers.ModelSerializer):
     class Meta:
         model = PortVLANMode
-        fields = ('')
+        fields = ('port','trunk')
 
-class RackObjectSerializer (serializer.ModelSerializer):
-
+class RackObjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = RackObject
-        fields = ('')
+        fields = ('oldid','name','label','objecttype','assetno','linkedobject','hasproblems','comment')
 
-class RackSpaceSerializer (serializer.ModelSerializer):
-
+class RackSpaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = RackSpace
-        fields = ('')
+        fields = ('rack','unitno','atom','state','parentobject')
 
-class RackThumbnailSerializer (serializer.ModelSerializer):
-
+class RackThumbnailSerializer(serializers.ModelSerializer):
     class Meta:
         model = RackThumbnail
-        fields = ('')
+        fields = ('rack','data')
 
-class ScriptSerializer (serializer.ModelSerializer):
-
+class ScriptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Script
-        fields = ('')
+        fields = ('name','content')
 
-class TagSerializer (serializer.ModelSerializer):
-
+class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ('')
+        fields = ('oldid','parenttag','assignable','name','colour','description')
 
-class TagFileSerializer (serializer.ModelSerializer):
-
+class TagFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagFile
-        fields = ('')
+        fields = ('file','tag','user','date')
 
-class TagIPv4NetworkSerializer (serializer.ModelSerializer):
-
+class TagIPv4NetworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagIPv4Network
-        fields = ('')
+        fields = ('ipv4net','tag','user','date')
 
-class TagIPv4RSPoolSerializer (serializer.ModelSerializer):
-
+class TagIPv4RSPoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagIPv4RSPool
-        fields = ('')
+        fields = ('ipv4rspool','tag','user','date')
 
-class TagIPv4VSSerializer (serializer.ModelSerializer):
-
+class TagIPv4VSSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagIPv4VS
-        fields = ('')
+        fields = ('ipv4vs','tag','user','date')
 
-class TagIPv6NetworkSerializer (serializer.ModelSerializer):
-
+class TagIPv6NetworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagIPv6Network
-        fields = ('')
+        fields = ('ipv6network','tag','user','date')
 
-class TagLocationSerializer (serializer.ModelSerializer):
-
+class TagLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagLocation
-        fields = ('')
+        fields = ('location','tag','user','date')
 
-class TagObjectSerializer (serializer.ModelSerializer):
-
+class TagObjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagObject
-        fields = ('')
+        fields = ('object','tag','user','date')
 
-class TagRackSerializer (serializer.ModelSerializer):
-
+class TagRackSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagRack
-        fields = ('')
+        fields = ('rack','tag','user','date')
 
-class VLANSTRuleSerializer (serializer.ModelSerializer):
-
+class VLANSTRuleSerializer(serializers.ModelSerializer):
     class Meta:
         model = VLANSTRule
-        fields = ('')
+        fields = ('oldid','rulenumber','portpcre','portrole','vlans','description')
 
-class VLANSwitchTemplateSerializer (serializer.ModelSerializer):
-
+class VLANSwitchTemplateSerializer(serializers.ModelSerializer):
     class Meta:
         model = VLANSwitchTemplate
-        fields = ('')
+        fields = ('oldid','revision','description','modifiedby')
 
-class VLANSwitchSerializer (serializer.ModelSerializer):
-
+class VLANSwitchSerializer(serializers.ModelSerializer):
     class Meta:
         model = VLANSwitch
-        fields = ('')
+        fields = ('parentobject','domain','template','revision','lasterror','lasterroroccured','changed','pushstarted','pushended')
 
-class VLANValidIDSerializer (serializer.ModelSerializer):
-
+class VLANValidIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = VLANValidID
-        fields = ('')
+        fields = ('vlanid')
 
-class VSSerializer (serializer.ModelSerializer):
-
+class VSSerializer(serializers.ModelSerializer):
     class Meta:
         model = VS
-        fields = ('')
+        fields = ('oldid','name','vsconfig','rsconfig')
 
-class VSEnabledIPsSerializer (serializer.ModelSerializer):
-
+class VSEnabledIPsSerializer(serializers.ModelSerializer):
     class Meta:
         model = VSEnabledIPs
-        fields = ('')
+        fields = ('parentobject','parentvs','rspool','vip')
 
-class VSEnabledPortsSerializer (serializer.ModelSerializer):
-
+class VSEnabledPortsSerializer(serializers.ModelSerializer):
     class Meta:
         model = VSEnabledPorts
-        fields = ('')
+        fields = ('parentobject','parentvs','protocol','rspool','port')
 
-class VSIPsSerializer (serializer.ModelSerializer):
-
+class VSIPsSerializer(serializers.ModelSerializer):
     class Meta:
         model = VSIPs
-        fields = ('')
+        fields = ('parentvs','ipv4address')
 
-class VSPortsSerializer (serializer.ModelSerializer):
 
+class VSPortsSerializer(serializers.ModelSerializer):
     class Meta:
         model = VSPorts
-        fields = ('')
+        fields = ('parentvs','protocol','port')
