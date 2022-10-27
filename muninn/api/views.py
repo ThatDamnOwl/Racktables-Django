@@ -12,10 +12,10 @@ def UserAccount_List(request):
     match (request.method):
         case "GET":
             data = UserAccount.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = UserAccountSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = UserAccountSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_201_CREATED)
@@ -35,9 +35,9 @@ def UserAccount_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = UserAccountSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -46,7 +46,7 @@ def UserAccount_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = UserAccountSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -56,13 +56,13 @@ def UserAccount_Detail(request,pk):
 
 @api_view('GET','POST')
 def UserConfig_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = UserConfig.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = UserConfigSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = UserConfigSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -82,9 +82,9 @@ def UserConfig_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = UserConfigSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -93,7 +93,7 @@ def UserConfig_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = UserConfigSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -103,13 +103,13 @@ def UserConfig_Detail(request,pk):
 
 @api_view('GET','POST')
 def Molecule_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Molecule.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = MoleculeSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = MoleculeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -129,9 +129,9 @@ def Molecule_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = MoleculeSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -140,7 +140,7 @@ def Molecule_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = MoleculeSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -150,13 +150,13 @@ def Molecule_Detail(request,pk):
 
 @api_view('GET','POST')
 def Location_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Location.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = LocationSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = LocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -176,9 +176,9 @@ def Location_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = LocationSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -187,7 +187,7 @@ def Location_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = LocationSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -197,13 +197,13 @@ def Location_Detail(request,pk):
 
 @api_view('GET','POST')
 def Row_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Row.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = RowSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = RowSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -223,9 +223,9 @@ def Row_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = RowSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -234,7 +234,7 @@ def Row_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = RowSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -244,13 +244,13 @@ def Row_Detail(request,pk):
 
 @api_view('GET','POST')
 def Rack_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Rack.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = RackSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = RackSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -270,9 +270,9 @@ def Rack_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = RackSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -281,7 +281,7 @@ def Rack_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = RackSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -291,13 +291,13 @@ def Rack_Detail(request,pk):
 
 @api_view('GET','POST')
 def Atom_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Atom.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = AtomSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = AtomSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -317,9 +317,9 @@ def Atom_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = AtomSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -328,7 +328,7 @@ def Atom_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = AtomSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -338,13 +338,13 @@ def Atom_Detail(request,pk):
 
 @api_view('GET','POST')
 def Attribute_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Attribute.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = AttributeSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = AttributeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -364,9 +364,9 @@ def Attribute_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = AttributeSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -375,7 +375,7 @@ def Attribute_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = AttributeSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -385,13 +385,13 @@ def Attribute_Detail(request,pk):
 
 @api_view('GET','POST')
 def Chapter_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Chapter.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = ChapterSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = ChapterSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -411,9 +411,9 @@ def Chapter_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = ChapterSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -422,7 +422,7 @@ def Chapter_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = ChapterSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -432,13 +432,13 @@ def Chapter_Detail(request,pk):
 
 @api_view('GET','POST')
 def Dictionary_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Dictionary.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = DictionarySerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = DictionarySerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -458,9 +458,9 @@ def Dictionary_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = DictionarySerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -469,7 +469,7 @@ def Dictionary_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = DictionarySerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -479,13 +479,13 @@ def Dictionary_Detail(request,pk):
 
 @api_view('GET','POST')
 def ObjectType_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = ObjectType.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = ObjectTypeSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = ObjectTypeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -505,9 +505,9 @@ def ObjectType_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = ObjectTypeSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -516,7 +516,7 @@ def ObjectType_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = ObjectTypeSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -526,13 +526,13 @@ def ObjectType_Detail(request,pk):
 
 @api_view('GET','POST')
 def Object_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Object.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = ObjectSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = ObjectSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -552,9 +552,9 @@ def Object_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = ObjectSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -563,7 +563,7 @@ def Object_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = ObjectSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -573,13 +573,13 @@ def Object_Detail(request,pk):
 
 @api_view('GET','POST')
 def AttributeMap_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = AttributeMap.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = AttributeMapSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = AttributeMapSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -599,9 +599,9 @@ def AttributeMap_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = AttributeMapSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -610,7 +610,7 @@ def AttributeMap_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = AttributeMapSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -621,13 +621,13 @@ def AttributeMap_Detail(request,pk):
 @api_view('GET','POST')
 def AttributeValueString_List(request):
 
-    match(request.method)
+    match (request.method):
         case "GET":
             data = AttributeValueString.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = AttributeValueStringSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = AttributeValueStringSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -648,9 +648,9 @@ def AttributeValueStrin_Detail(request,pk):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-        match(request.method)
+        match (request.method):
             case "GET":
-                serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+                serializer = AttributeValueStrinSerializer(req_object, context={'request': request}, many=False)
             case "POST":
                 return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
             case "PATCH":
@@ -659,7 +659,7 @@ def AttributeValueStrin_Detail(request,pk):
                 req_object.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
             case "PUT":
-                    serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+                    serializer = AttributeValueStrinSerializer(req_object, data=request.data, context={'request': request})
                 if serializer.is_valid():
                     serializer.save()
                     return Response(status=status.HTTP_204_NO_CONTENT)
@@ -669,13 +669,13 @@ def AttributeValueStrin_Detail(request,pk):
     
 @api_view('GET','POST')
 def AttributeValueInt_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = AttributeValueInt.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = AttributeValueIntSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = AttributeValueIntSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -695,9 +695,9 @@ def AttributeValueInt_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = AttributeValueIntSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -706,7 +706,7 @@ def AttributeValueInt_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = AttributeValueIntSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -716,13 +716,13 @@ def AttributeValueInt_Detail(request,pk):
 
 @api_view('GET','POST')
 def AttributeValueFloat_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = AttributeValueFloat.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = AttributeValueFloatSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = AttributeValueFloatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -742,9 +742,9 @@ def AttributeValueFloat_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = AttributeValueFloatSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -753,7 +753,7 @@ def AttributeValueFloat_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = AttributeValueFloatSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -763,13 +763,13 @@ def AttributeValueFloat_Detail(request,pk):
 
 @api_view('GET','POST')
 def AttributeValueDict_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = AttributeValueDict.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = AttributeValueDictSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = AttributeValueDictSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -789,9 +789,9 @@ def AttributeValueDict_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = AttributeValueDictSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -800,7 +800,7 @@ def AttributeValueDict_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = AttributeValueDictSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -810,13 +810,13 @@ def AttributeValueDict_Detail(request,pk):
 
 @api_view('GET','POST')
 def AttributeValueDate_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = AttributeValueDate.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = AttributeValueDateSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = AttributeValueDateSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -836,9 +836,9 @@ def AttributeValueDate_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = AttributeValueDateSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -847,7 +847,7 @@ def AttributeValueDate_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = AttributeValueDateSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -857,13 +857,13 @@ def AttributeValueDate_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4Address_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv4Address.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv4AddressSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv4AddressSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -883,9 +883,9 @@ def IPv4Address_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv4AddressSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -894,7 +894,7 @@ def IPv4Address_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv4AddressSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -904,13 +904,13 @@ def IPv4Address_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4VS_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv4VS.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv4VSSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv4VSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -930,9 +930,9 @@ def IPv4VS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv4VSSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -941,7 +941,7 @@ def IPv4VS_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv4VSSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -951,13 +951,13 @@ def IPv4VS_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4Allocation_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv4Allocation.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv4AllocationSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv4AllocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -977,9 +977,9 @@ def IPv4Allocation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv4AllocationSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -988,7 +988,7 @@ def IPv4Allocation_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv4AllocationSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -998,13 +998,13 @@ def IPv4Allocation_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4RSPool_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv4RSPool.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv4RSPoolSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv4RSPoolSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1024,9 +1024,9 @@ def IPv4RSPool_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv4RSPoolSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1035,7 +1035,7 @@ def IPv4RSPool_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv4RSPoolSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1045,13 +1045,13 @@ def IPv4RSPool_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4RS_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv4RS.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv4RSSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv4RSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1071,9 +1071,9 @@ def IPv4RS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv4RSSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1082,7 +1082,7 @@ def IPv4RS_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv4RSSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1092,13 +1092,13 @@ def IPv4RS_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4LB_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv4LB.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv4LBSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv4LBSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1118,9 +1118,9 @@ def IPv4LB_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv4LBSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1129,7 +1129,7 @@ def IPv4LB_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv4LBSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1139,13 +1139,13 @@ def IPv4LB_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4Log_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv4Log.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv4LogSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv4LogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1165,9 +1165,9 @@ def IPv4Log_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv4LogSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1176,7 +1176,7 @@ def IPv4Log_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv4LogSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1186,13 +1186,13 @@ def IPv4Log_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4NAT_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv4NAT.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv4NATSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv4NATSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1212,9 +1212,9 @@ def IPv4NAT_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv4NATSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1223,7 +1223,7 @@ def IPv4NAT_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv4NATSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1233,13 +1233,13 @@ def IPv4NAT_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv4Network_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv4Network.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv4NetworkSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv4NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1259,9 +1259,9 @@ def IPv4Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv4NetworkSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1270,7 +1270,7 @@ def IPv4Network_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv4NetworkSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1280,13 +1280,13 @@ def IPv4Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv6Address_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv6Address.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv6AddressSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv6AddressSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1306,9 +1306,9 @@ def IPv6Address_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv6AddressSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1317,7 +1317,7 @@ def IPv6Address_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv6AddressSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1327,13 +1327,13 @@ def IPv6Address_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv6Allocation_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv6Allocation.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv6AllocationSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv6AllocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1353,9 +1353,9 @@ def IPv6Allocation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv6AllocationSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1364,7 +1364,7 @@ def IPv6Allocation_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv6AllocationSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1374,13 +1374,13 @@ def IPv6Allocation_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv6Log_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv6Log.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv6LogSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv6LogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1400,9 +1400,9 @@ def IPv6Log_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv6LogSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1411,7 +1411,7 @@ def IPv6Log_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv6LogSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1421,13 +1421,13 @@ def IPv6Log_Detail(request,pk):
 
 @api_view('GET','POST')
 def IPv6Network_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = IPv6Network.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = IPv6NetworkSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = IPv6NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1447,9 +1447,9 @@ def IPv6Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = IPv6NetworkSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1458,7 +1458,7 @@ def IPv6Network_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = IPv6NetworkSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1468,13 +1468,13 @@ def IPv6Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def Config_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Config.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = ConfigSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = ConfigSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1494,9 +1494,9 @@ def Config_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = ConfigSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1505,7 +1505,7 @@ def Config_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = ConfigSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1515,13 +1515,13 @@ def Config_Detail(request,pk):
 
 @api_view('GET','POST')
 def File_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = File.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1541,9 +1541,9 @@ def File_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1552,7 +1552,7 @@ def File_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1562,13 +1562,13 @@ def File_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkIPv4Network_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = FileLinkIPv4Network.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileLinkIPv4NetworkSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileLinkIPv4NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1588,9 +1588,9 @@ def FileLinkIPv4Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileLinkIPv4NetworkSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1599,7 +1599,7 @@ def FileLinkIPv4Network_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileLinkIPv4NetworkSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1609,13 +1609,13 @@ def FileLinkIPv4Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkIPv4RSPool_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = FileLinkIPv4RSPool.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileLinkIPv4RSPoolSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileLinkIPv4RSPoolSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1635,9 +1635,9 @@ def FileLinkIPv4RSPool_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileLinkIPv4RSPoolSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1646,7 +1646,7 @@ def FileLinkIPv4RSPool_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileLinkIPv4RSPoolSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1656,13 +1656,13 @@ def FileLinkIPv4RSPool_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkIPv4VS_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = FileLinkIPv4VS.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileLinkIPv4VSSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileLinkIPv4VSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1682,9 +1682,9 @@ def FileLinkIPv4VS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileLinkIPv4VSSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1693,7 +1693,7 @@ def FileLinkIPv4VS_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileLinkIPv4VSSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1703,13 +1703,13 @@ def FileLinkIPv4VS_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkIPv6Network_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = FileLinkIPv6Network.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileLinkIPv6NetworkSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileLinkIPv6NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1729,9 +1729,9 @@ def FileLinkIPv6Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileLinkIPv6NetworkSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1740,7 +1740,7 @@ def FileLinkIPv6Network_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileLinkIPv6NetworkSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1750,13 +1750,13 @@ def FileLinkIPv6Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkLocation_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = FileLinkLocation.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileLinkLocationSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileLinkLocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1776,9 +1776,9 @@ def FileLinkLocation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileLinkLocationSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1787,7 +1787,7 @@ def FileLinkLocation_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileLinkLocationSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1797,13 +1797,13 @@ def FileLinkLocation_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkObject_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = FileLinkObject.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileLinkObjectSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileLinkObjectSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1823,9 +1823,9 @@ def FileLinkObject_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileLinkObjectSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1834,7 +1834,7 @@ def FileLinkObject_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileLinkObjectSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1844,13 +1844,13 @@ def FileLinkObject_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkRack_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = FileLinkRack.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileLinkRackSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileLinkRackSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1870,9 +1870,9 @@ def FileLinkRack_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileLinkRackSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1881,7 +1881,7 @@ def FileLinkRack_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileLinkRackSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1891,13 +1891,13 @@ def FileLinkRack_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkRow_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = FileLinkRow.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileLinkRowSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileLinkRowSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1917,9 +1917,9 @@ def FileLinkRow_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileLinkRowSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1928,7 +1928,7 @@ def FileLinkRow_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileLinkRowSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1938,13 +1938,13 @@ def FileLinkRow_Detail(request,pk):
 
 @api_view('GET','POST')
 def FileLinkUser_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = FileLinkUser.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = FileLinkUserSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = FileLinkUserSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -1964,9 +1964,9 @@ def FileLinkUser_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = FileLinkUserSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -1975,7 +1975,7 @@ def FileLinkUser_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = FileLinkUserSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -1985,13 +1985,13 @@ def FileLinkUser_Detail(request,pk):
 
 @api_view('GET','POST')
 def MountOperation_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = MountOperation.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = MountOperationSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = MountOperationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2011,9 +2011,9 @@ def MountOperation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = MountOperationSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2022,7 +2022,7 @@ def MountOperation_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = MountOperationSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2032,13 +2032,13 @@ def MountOperation_Detail(request,pk):
 
 @api_view('GET','POST')
 def ObjectHistory_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = ObjectHistory.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = ObjectHistorySerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = ObjectHistorySerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2058,9 +2058,9 @@ def ObjectHistory_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = ObjectHistorySerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2069,7 +2069,7 @@ def ObjectHistory_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = ObjectHistorySerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2079,13 +2079,13 @@ def ObjectHistory_Detail(request,pk):
 
 @api_view('GET','POST')
 def ObjectLog_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = ObjectLog.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = ObjectLogSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = ObjectLogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2105,9 +2105,9 @@ def ObjectLog_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = ObjectLogSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2116,7 +2116,7 @@ def ObjectLog_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = ObjectLogSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2126,13 +2126,13 @@ def ObjectLog_Detail(request,pk):
 
 @api_view('GET','POST')
 def PatchCableConnector_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PatchCableConnector.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PatchCableConnectorSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PatchCableConnectorSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2152,9 +2152,9 @@ def PatchCableConnector_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PatchCableConnectorSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2163,7 +2163,7 @@ def PatchCableConnector_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PatchCableConnectorSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2173,13 +2173,13 @@ def PatchCableConnector_Detail(request,pk):
 
 @api_view('GET','POST')
 def PatchCableType_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PatchCableType.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PatchCableTypeSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PatchCableTypeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2199,9 +2199,9 @@ def PatchCableType_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PatchCableTypeSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2210,7 +2210,7 @@ def PatchCableType_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PatchCableTypeSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2221,13 +2221,13 @@ def PatchCableType_Detail(request,pk):
 @api_view('GET','POST')
 def PatchCableConnectorCompat_List(request):
 
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PatchCableConnectorCompat.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PatchCableConnectorCompatSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PatchCableConnectorCompatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2247,9 +2247,9 @@ def PatchCableConnector_DetailCompat(request,pk):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-        match(request.method)
+        match (request.method):
             case "GET":
-                serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+                serializer = PatchCableConnectorSerializer(req_object, context={'request': request}, many=False)
             case "POST":
                 return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
             case "PATCH":
@@ -2258,7 +2258,7 @@ def PatchCableConnector_DetailCompat(request,pk):
                 req_object.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
             case "PUT":
-                    serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+                    serializer = PatchCableConnectorSerializer(req_object, data=request.data, context={'request': request})
                 if serializer.is_valid():
                     serializer.save()
                     return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2268,13 +2268,13 @@ def PatchCableConnector_DetailCompat(request,pk):
     
 @api_view('GET','POST')
 def PatchCableHeap_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PatchCableHeap.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PatchCableHeapSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PatchCableHeapSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2294,9 +2294,9 @@ def PatchCableHeap_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PatchCableHeapSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2305,7 +2305,7 @@ def PatchCableHeap_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PatchCableHeapSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2315,13 +2315,13 @@ def PatchCableHeap_Detail(request,pk):
 
 @api_view('GET','POST')
 def PatchCableHeapLog_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PatchCableHeapLog.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PatchCableHeapLogSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PatchCableHeapLogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2341,9 +2341,9 @@ def PatchCableHeapLog_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PatchCableHeapLogSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2352,7 +2352,7 @@ def PatchCableHeapLog_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PatchCableHeapLogSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2362,13 +2362,13 @@ def PatchCableHeapLog_Detail(request,pk):
 
 @api_view('GET','POST')
 def Plugin_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Plugin.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PluginSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PluginSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2388,9 +2388,9 @@ def Plugin_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PluginSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2399,7 +2399,7 @@ def Plugin_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PluginSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2409,13 +2409,13 @@ def Plugin_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortInnerInterface_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PortInnerInterface.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PortInnerInterfaceSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PortInnerInterfaceSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2435,9 +2435,9 @@ def PortInnerInterface_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PortInnerInterfaceSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2446,7 +2446,7 @@ def PortInnerInterface_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PortInnerInterfaceSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2456,13 +2456,13 @@ def PortInnerInterface_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortOuterInterface_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PortOuterInterface.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PortOuterInterfaceSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PortOuterInterfaceSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2482,9 +2482,9 @@ def PortOuterInterface_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PortOuterInterfaceSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2493,7 +2493,7 @@ def PortOuterInterface_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PortOuterInterfaceSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2503,13 +2503,13 @@ def PortOuterInterface_Detail(request,pk):
 
 @api_view('GET','POST')
 def PatchCableOIFCompat_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PatchCableOIFCompat.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PatchCableOIFCompatSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PatchCableOIFCompatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2529,9 +2529,9 @@ def PatchCableOIFCompat_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PatchCableOIFCompatSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2540,7 +2540,7 @@ def PatchCableOIFCompat_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PatchCableOIFCompatSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2550,13 +2550,13 @@ def PatchCableOIFCompat_Detail(request,pk):
 
 @api_view('GET','POST')
 def Port_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Port.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PortSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PortSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2576,9 +2576,9 @@ def Port_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PortSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2587,7 +2587,7 @@ def Port_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PortSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2597,13 +2597,13 @@ def Port_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANDomain_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VLANDomain.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VLANDomainSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VLANDomainSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2623,9 +2623,9 @@ def VLANDomain_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VLANDomainSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2634,7 +2634,7 @@ def VLANDomain_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VLANDomainSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2644,13 +2644,13 @@ def VLANDomain_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANDescription_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VLANDescription.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VLANDescriptionSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VLANDescriptionSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2670,9 +2670,9 @@ def VLANDescription_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VLANDescriptionSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2681,7 +2681,7 @@ def VLANDescription_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VLANDescriptionSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2691,13 +2691,13 @@ def VLANDescription_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANIPv4_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VLANIPv4.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VLANIPv4Serializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VLANIPv4Serializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2717,9 +2717,9 @@ def VLANIPv4_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VLANIPv4Serializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2728,7 +2728,7 @@ def VLANIPv4_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VLANIPv4Serializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2738,13 +2738,13 @@ def VLANIPv4_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANIPv6_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VLANIPv6.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VLANIPv6Serializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VLANIPv6Serializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2764,9 +2764,9 @@ def VLANIPv6_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VLANIPv6Serializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2775,7 +2775,7 @@ def VLANIPv6_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VLANIPv6Serializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2785,13 +2785,13 @@ def VLANIPv6_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortAllowedVLAN_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PortAllowedVLAN.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PortAllowedVLANSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PortAllowedVLANSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2811,9 +2811,9 @@ def PortAllowedVLAN_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PortAllowedVLANSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2822,7 +2822,7 @@ def PortAllowedVLAN_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PortAllowedVLANSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2832,13 +2832,13 @@ def PortAllowedVLAN_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortCompat_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PortCompat.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PortCompatSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PortCompatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2858,9 +2858,9 @@ def PortCompat_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PortCompatSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2869,7 +2869,7 @@ def PortCompat_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PortCompatSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2879,13 +2879,13 @@ def PortCompat_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortInterfaceCompat_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PortInterfaceCompat.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PortInterfaceCompatSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PortInterfaceCompatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2905,9 +2905,9 @@ def PortInterfaceCompat_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PortInterfaceCompatSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2916,7 +2916,7 @@ def PortInterfaceCompat_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PortInterfaceCompatSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2926,13 +2926,13 @@ def PortInterfaceCompat_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortLog_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PortLog.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PortLogSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PortLogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2952,9 +2952,9 @@ def PortLog_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PortLogSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -2963,7 +2963,7 @@ def PortLog_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PortLogSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -2973,13 +2973,13 @@ def PortLog_Detail(request,pk):
 
 @api_view('GET','POST')
 def PortVLANMode_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = PortVLANMode.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = PortVLANModeSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = PortVLANModeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -2999,9 +2999,9 @@ def PortVLANMode_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = PortVLANModeSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3010,7 +3010,7 @@ def PortVLANMode_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = PortVLANModeSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3020,13 +3020,13 @@ def PortVLANMode_Detail(request,pk):
 
 @api_view('GET','POST')
 def RackObject_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = RackObject.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = RackObjectSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = RackObjectSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3046,9 +3046,9 @@ def RackObject_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = RackObjectSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3057,7 +3057,7 @@ def RackObject_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = RackObjectSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3067,13 +3067,13 @@ def RackObject_Detail(request,pk):
 
 @api_view('GET','POST')
 def RackSpace_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = RackSpace.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = RackSpaceSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = RackSpaceSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3093,9 +3093,9 @@ def RackSpace_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = RackSpaceSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3104,7 +3104,7 @@ def RackSpace_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = RackSpaceSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3114,13 +3114,13 @@ def RackSpace_Detail(request,pk):
 
 @api_view('GET','POST')
 def RackThumbnail_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = RackThumbnail.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = RackThumbnailSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = RackThumbnailSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3140,9 +3140,9 @@ def RackThumbnail_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = RackThumbnailSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3151,7 +3151,7 @@ def RackThumbnail_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = RackThumbnailSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3161,13 +3161,13 @@ def RackThumbnail_Detail(request,pk):
 
 @api_view('GET','POST')
 def Script_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Script.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = ScriptSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = ScriptSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3187,9 +3187,9 @@ def Script_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = ScriptSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3198,7 +3198,7 @@ def Script_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = ScriptSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3208,13 +3208,13 @@ def Script_Detail(request,pk):
 
 @api_view('GET','POST')
 def Tag_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = Tag.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = TagSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = TagSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3234,9 +3234,9 @@ def Tag_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = TagSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3245,7 +3245,7 @@ def Tag_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = TagSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3255,13 +3255,13 @@ def Tag_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagFile_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = TagFile.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = TagFileSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = TagFileSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3281,9 +3281,9 @@ def TagFile_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = TagFileSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3292,7 +3292,7 @@ def TagFile_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = TagFileSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3302,13 +3302,13 @@ def TagFile_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagIPv4Network_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = TagIPv4Network.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = TagIPv4NetworkSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = TagIPv4NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3328,9 +3328,9 @@ def TagIPv4Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = TagIPv4NetworkSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3339,7 +3339,7 @@ def TagIPv4Network_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = TagIPv4NetworkSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3349,13 +3349,13 @@ def TagIPv4Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagIPv4RSPool_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = TagIPv4RSPool.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = TagIPv4RSPoolSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = TagIPv4RSPoolSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3375,9 +3375,9 @@ def TagIPv4RSPool_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = TagIPv4RSPoolSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3386,7 +3386,7 @@ def TagIPv4RSPool_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = TagIPv4RSPoolSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3396,13 +3396,13 @@ def TagIPv4RSPool_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagIPv4VS_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = TagIPv4VS.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = TagIPv4VSSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = TagIPv4VSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3422,9 +3422,9 @@ def TagIPv4VS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = TagIPv4VSSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3433,7 +3433,7 @@ def TagIPv4VS_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = TagIPv4VSSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3443,13 +3443,13 @@ def TagIPv4VS_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagIPv6Network_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = TagIPv6Network.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = TagIPv6NetworkSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = TagIPv6NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3469,9 +3469,9 @@ def TagIPv6Network_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = TagIPv6NetworkSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3480,7 +3480,7 @@ def TagIPv6Network_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = TagIPv6NetworkSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3490,13 +3490,13 @@ def TagIPv6Network_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagLocation_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = TagLocation.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = TagLocationSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = TagLocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3516,9 +3516,9 @@ def TagLocation_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = TagLocationSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3527,7 +3527,7 @@ def TagLocation_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = TagLocationSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3537,13 +3537,13 @@ def TagLocation_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagObject_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = TagObject.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = TagObjectSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = TagObjectSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3563,9 +3563,9 @@ def TagObject_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = TagObjectSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3574,7 +3574,7 @@ def TagObject_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = TagObjectSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3584,13 +3584,13 @@ def TagObject_Detail(request,pk):
 
 @api_view('GET','POST')
 def TagRack_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = TagRack.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = TagRackSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = TagRackSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3610,9 +3610,9 @@ def TagRack_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = TagRackSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3621,7 +3621,7 @@ def TagRack_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = TagRackSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3631,13 +3631,13 @@ def TagRack_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANSTRule_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VLANSTRule.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VLANSTRuleSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VLANSTRuleSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3657,9 +3657,9 @@ def VLANSTRule_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VLANSTRuleSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3668,7 +3668,7 @@ def VLANSTRule_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VLANSTRuleSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3678,13 +3678,13 @@ def VLANSTRule_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANSwitchTemplate_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VLANSwitchTemplate.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VLANSwitchTemplateSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VLANSwitchTemplateSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3704,9 +3704,9 @@ def VLANSwitchTemplate_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VLANSwitchTemplateSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3715,7 +3715,7 @@ def VLANSwitchTemplate_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VLANSwitchTemplateSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3725,13 +3725,13 @@ def VLANSwitchTemplate_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANSwitch_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VLANSwitch.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VLANSwitchSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VLANSwitchSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3751,9 +3751,9 @@ def VLANSwitch_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VLANSwitchSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3762,7 +3762,7 @@ def VLANSwitch_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VLANSwitchSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3772,13 +3772,13 @@ def VLANSwitch_Detail(request,pk):
 
 @api_view('GET','POST')
 def VLANValidID_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VLANValidID.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VLANValidIDSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VLANValidIDSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3798,9 +3798,9 @@ def VLANValidID_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VLANValidIDSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3809,7 +3809,7 @@ def VLANValidID_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VLANValidIDSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3819,13 +3819,13 @@ def VLANValidID_Detail(request,pk):
 
 @api_view('GET','POST')
 def VS_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VS.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VSSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3845,9 +3845,9 @@ def VS_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VSSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3856,7 +3856,7 @@ def VS_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VSSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3866,13 +3866,13 @@ def VS_Detail(request,pk):
 
 @api_view('GET','POST')
 def VSEnabledIPs_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VSEnabledIPs.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VSEnabledIPsSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VSEnabledIPsSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3892,9 +3892,9 @@ def VSEnabledIPs_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VSEnabledIPsSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3903,7 +3903,7 @@ def VSEnabledIPs_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VSEnabledIPsSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3913,13 +3913,13 @@ def VSEnabledIPs_Detail(request,pk):
 
 @api_view('GET','POST')
 def VSEnabledPorts_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VSEnabledPorts.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VSEnabledPortsSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VSEnabledPortsSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3939,9 +3939,9 @@ def VSEnabledPorts_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VSEnabledPortsSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3950,7 +3950,7 @@ def VSEnabledPorts_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VSEnabledPortsSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -3960,13 +3960,13 @@ def VSEnabledPorts_Detail(request,pk):
 
 @api_view('GET','POST')
 def VSIPs_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VSIPs.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VSIPsSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VSIPsSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -3986,9 +3986,9 @@ def VSIPs_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VSIPsSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -3997,7 +3997,7 @@ def VSIPs_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VSIPsSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
@@ -4007,13 +4007,13 @@ def VSIPs_Detail(request,pk):
 
 @api_view('GET','POST')
 def VSPorts_List(request):
-    match(request.method)
+    match (request.method):
         case "GET":
             data = VSPorts.objects.all()
-            serializer = INSERT_SERIALIZER_HERE(data, context={'request':request},many=True)
+            serializer = VSPortsSerializer(data, context={'request':request},many=True)
             return Response(serializer.data)
         case "POST":
-            serializer = INSERT_SERIALIZER_HERE(data=request.data)
+            serializer = VSPortsSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return.Response(status=status.HTTP_201_CREATED)
@@ -4033,9 +4033,9 @@ def VSPorts_Detail(request,pk):
     except req_object.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    match(request.method)
+    match (request.method):
         case "GET":
-            serializer = INSERT_SERIALIZER_HERE(req_object, context={'request': request}, many=False)
+            serializer = VSPortsSerializer(req_object, context={'request': request}, many=False)
         case "POST":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "PATCH":
@@ -4044,7 +4044,7 @@ def VSPorts_Detail(request,pk):
             req_object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         case "PUT":
-            serializer = INSERT_SERIALIZER_HERE(req_object, data=request.data, context={'request': request})
+            serializer = VSPortsSerializer(req_object, data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
