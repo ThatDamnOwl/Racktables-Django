@@ -18,7 +18,7 @@ def UserAccount_List(request):
             serializer = INSERT_SERIALIZER_HERE(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
