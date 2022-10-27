@@ -65,7 +65,7 @@ def UserConfig_List(request):
             serializer = UserConfigSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -112,7 +112,7 @@ def Molecule_List(request):
             serializer = MoleculeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -159,7 +159,7 @@ def Location_List(request):
             serializer = LocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -206,7 +206,7 @@ def Row_List(request):
             serializer = RowSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -253,7 +253,7 @@ def Rack_List(request):
             serializer = RackSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -300,7 +300,7 @@ def Atom_List(request):
             serializer = AtomSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -347,7 +347,7 @@ def Attribute_List(request):
             serializer = AttributeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -394,7 +394,7 @@ def Chapter_List(request):
             serializer = ChapterSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -441,7 +441,7 @@ def Dictionary_List(request):
             serializer = DictionarySerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -488,7 +488,7 @@ def ObjectType_List(request):
             serializer = ObjectTypeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -535,7 +535,7 @@ def Object_List(request):
             serializer = ObjectSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -582,7 +582,7 @@ def AttributeMap_List(request):
             serializer = AttributeMapSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -630,7 +630,7 @@ def AttributeValueString_List(request):
             serializer = AttributeValueStringSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -678,7 +678,7 @@ def AttributeValueInt_List(request):
             serializer = AttributeValueIntSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -725,7 +725,7 @@ def AttributeValueFloat_List(request):
             serializer = AttributeValueFloatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -772,7 +772,7 @@ def AttributeValueDict_List(request):
             serializer = AttributeValueDictSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -819,7 +819,7 @@ def AttributeValueDate_List(request):
             serializer = AttributeValueDateSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -866,7 +866,7 @@ def IPv4Address_List(request):
             serializer = IPv4AddressSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -913,7 +913,7 @@ def IPv4VS_List(request):
             serializer = IPv4VSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -960,7 +960,7 @@ def IPv4Allocation_List(request):
             serializer = IPv4AllocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1007,7 +1007,7 @@ def IPv4RSPool_List(request):
             serializer = IPv4RSPoolSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1054,7 +1054,7 @@ def IPv4RS_List(request):
             serializer = IPv4RSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1101,7 +1101,7 @@ def IPv4LB_List(request):
             serializer = IPv4LBSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1148,7 +1148,7 @@ def IPv4Log_List(request):
             serializer = IPv4LogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1195,7 +1195,7 @@ def IPv4NAT_List(request):
             serializer = IPv4NATSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1242,7 +1242,7 @@ def IPv4Network_List(request):
             serializer = IPv4NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1289,7 +1289,7 @@ def IPv6Address_List(request):
             serializer = IPv6AddressSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1336,7 +1336,7 @@ def IPv6Allocation_List(request):
             serializer = IPv6AllocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1383,7 +1383,7 @@ def IPv6Log_List(request):
             serializer = IPv6LogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1430,7 +1430,7 @@ def IPv6Network_List(request):
             serializer = IPv6NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1477,7 +1477,7 @@ def Config_List(request):
             serializer = ConfigSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1524,7 +1524,7 @@ def File_List(request):
             serializer = FileSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1571,7 +1571,7 @@ def FileLinkIPv4Network_List(request):
             serializer = FileLinkIPv4NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1618,7 +1618,7 @@ def FileLinkIPv4RSPool_List(request):
             serializer = FileLinkIPv4RSPoolSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1665,7 +1665,7 @@ def FileLinkIPv4VS_List(request):
             serializer = FileLinkIPv4VSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1712,7 +1712,7 @@ def FileLinkIPv6Network_List(request):
             serializer = FileLinkIPv6NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1759,7 +1759,7 @@ def FileLinkLocation_List(request):
             serializer = FileLinkLocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1806,7 +1806,7 @@ def FileLinkObject_List(request):
             serializer = FileLinkObjectSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1853,7 +1853,7 @@ def FileLinkRack_List(request):
             serializer = FileLinkRackSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1900,7 +1900,7 @@ def FileLinkRow_List(request):
             serializer = FileLinkRowSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1947,7 +1947,7 @@ def FileLinkUser_List(request):
             serializer = FileLinkUserSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -1994,7 +1994,7 @@ def MountOperation_List(request):
             serializer = MountOperationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2041,7 +2041,7 @@ def ObjectHistory_List(request):
             serializer = ObjectHistorySerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2088,7 +2088,7 @@ def ObjectLog_List(request):
             serializer = ObjectLogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2135,7 +2135,7 @@ def PatchCableConnector_List(request):
             serializer = PatchCableConnectorSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2182,7 +2182,7 @@ def PatchCableType_List(request):
             serializer = PatchCableTypeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2230,7 +2230,7 @@ def PatchCableConnectorCompat_List(request):
             serializer = PatchCableConnectorCompatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2277,7 +2277,7 @@ def PatchCableHeap_List(request):
             serializer = PatchCableHeapSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2324,7 +2324,7 @@ def PatchCableHeapLog_List(request):
             serializer = PatchCableHeapLogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2371,7 +2371,7 @@ def Plugin_List(request):
             serializer = PluginSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2418,7 +2418,7 @@ def PortInnerInterface_List(request):
             serializer = PortInnerInterfaceSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2465,7 +2465,7 @@ def PortOuterInterface_List(request):
             serializer = PortOuterInterfaceSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2512,7 +2512,7 @@ def PatchCableOIFCompat_List(request):
             serializer = PatchCableOIFCompatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2559,7 +2559,7 @@ def Port_List(request):
             serializer = PortSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2606,7 +2606,7 @@ def VLANDomain_List(request):
             serializer = VLANDomainSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2653,7 +2653,7 @@ def VLANDescription_List(request):
             serializer = VLANDescriptionSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2700,7 +2700,7 @@ def VLANIPv4_List(request):
             serializer = VLANIPv4Serializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2747,7 +2747,7 @@ def VLANIPv6_List(request):
             serializer = VLANIPv6Serializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2794,7 +2794,7 @@ def PortAllowedVLAN_List(request):
             serializer = PortAllowedVLANSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2841,7 +2841,7 @@ def PortCompat_List(request):
             serializer = PortCompatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2888,7 +2888,7 @@ def PortInterfaceCompat_List(request):
             serializer = PortInterfaceCompatSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2935,7 +2935,7 @@ def PortLog_List(request):
             serializer = PortLogSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -2982,7 +2982,7 @@ def PortVLANMode_List(request):
             serializer = PortVLANModeSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3029,7 +3029,7 @@ def RackObject_List(request):
             serializer = RackObjectSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3076,7 +3076,7 @@ def RackSpace_List(request):
             serializer = RackSpaceSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3123,7 +3123,7 @@ def RackThumbnail_List(request):
             serializer = RackThumbnailSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3170,7 +3170,7 @@ def Script_List(request):
             serializer = ScriptSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3217,7 +3217,7 @@ def Tag_List(request):
             serializer = TagSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3264,7 +3264,7 @@ def TagFile_List(request):
             serializer = TagFileSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3311,7 +3311,7 @@ def TagIPv4Network_List(request):
             serializer = TagIPv4NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3358,7 +3358,7 @@ def TagIPv4RSPool_List(request):
             serializer = TagIPv4RSPoolSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3405,7 +3405,7 @@ def TagIPv4VS_List(request):
             serializer = TagIPv4VSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3452,7 +3452,7 @@ def TagIPv6Network_List(request):
             serializer = TagIPv6NetworkSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3499,7 +3499,7 @@ def TagLocation_List(request):
             serializer = TagLocationSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3546,7 +3546,7 @@ def TagObject_List(request):
             serializer = TagObjectSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3593,7 +3593,7 @@ def TagRack_List(request):
             serializer = TagRackSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3640,7 +3640,7 @@ def VLANSTRule_List(request):
             serializer = VLANSTRuleSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3687,7 +3687,7 @@ def VLANSwitchTemplate_List(request):
             serializer = VLANSwitchTemplateSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3734,7 +3734,7 @@ def VLANSwitch_List(request):
             serializer = VLANSwitchSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3781,7 +3781,7 @@ def VLANValidID_List(request):
             serializer = VLANValidIDSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3828,7 +3828,7 @@ def VS_List(request):
             serializer = VSSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3875,7 +3875,7 @@ def VSEnabledIPs_List(request):
             serializer = VSEnabledIPsSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3922,7 +3922,7 @@ def VSEnabledPorts_List(request):
             serializer = VSEnabledPortsSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -3969,7 +3969,7 @@ def VSIPs_List(request):
             serializer = VSIPsSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
@@ -4016,7 +4016,7 @@ def VSPorts_List(request):
             serializer = VSPortsSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return.Response(status=status.HTTP_201_CREATED)
+                return Response(status=status.HTTP_201_CREATED)
         case "PATCH":
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         case "DELETE":
