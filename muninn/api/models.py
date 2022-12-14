@@ -22,7 +22,7 @@ class Molecule(models.Model):
 class Location(models.Model):
 	oldid = models.IntegerField()
 	name = models.TextField(255)
-	hasproblems = models.BinaryField()
+	hasproblems = models.BooleanField()
 	comment = models.TextField()
 	parentlocation = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
 
@@ -542,7 +542,7 @@ class VSEnabledPorts(models.Model):
 
 class VSIPs(models.Model):
 	parentvs = models.ForeignKey(VS, on_delete=models.CASCADE)
-	ipv4address	= models.ForeignKey(IPv4Address, on_delete=models.CASCADE)
+	ipv4address = models.ForeignKey(IPv4Address, on_delete=models.CASCADE)
 
 class VSPorts(models.Model):
 	parentvs = models.ForeignKey(VS, on_delete=models.CASCADE)
